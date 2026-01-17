@@ -3,114 +3,161 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday</title>
+<title>Birthday Desktop</title>
 
 <style>
 body {
-    margin: 0;
-    font-family: Arial, Helvetica, sans-serif;
-    background: linear-gradient(180deg, #ffecd2, #fcb69f);
-    text-align: center;
+  margin: 0;
+  background: #02024b;
+  font-family: Tahoma, Arial, sans-serif;
+  color: white;
+  height: 100vh;
+  overflow: hidden;
 }
 
-.container {
-    padding: 20px;
+/* Desktop area */
+.desktop {
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
 
-h1 {
-    margin-top: 10px;
+/* Icons */
+.icon {
+  width: 80px;
+  text-align: center;
+  margin: 20px;
+  cursor: pointer;
 }
 
-img {
-    width: 85%;
-    max-width: 320px;
-    border-radius: 15px;
-    margin-top: 20px;
+.icon img {
+  width: 48px;
 }
 
-.cake {
-    font-size: 110px;
-    margin-top: 20px;
+.icon span {
+  display: block;
+  font-size: 12px;
+  margin-top: 5px;
 }
 
-.flame {
-    animation: flicker 0.8s infinite;
+/* Window */
+.window {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 500px;
+  max-width: 90%;
+  background: #f5f5f5;
+  color: black;
+  border: 2px solid #000;
+  transform: translate(-50%, -50%);
+  display: none;
 }
 
-@keyframes flicker {
-    0% { opacity: 1; }
-    50% { opacity: 0.5; }
-    100% { opacity: 1; }
+.titlebar {
+  background: #000080;
+  color: white;
+  padding: 6px 10px;
+  font-size: 14px;
+}
+
+.content {
+  padding: 15px;
+  text-align: center;
 }
 
 button {
-    margin-top: 25px;
-    padding: 12px 28px;
-    font-size: 16px;
-    border: none;
-    border-radius: 10px;
-    background-color: #ff6f61;
-    color: #fff;
-    cursor: pointer;
+  padding: 8px 20px;
+  background: #ff6f61;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
 
-button:active {
-    transform: scale(0.98);
+.cake {
+  font-size: 80px;
 }
 
-#text {
-    margin-top: 20px;
-    white-space: pre-line;
-    font-size: 16px;
+.flame {
+  animation: flicker 0.6s infinite;
+}
+
+@keyframes flicker {
+  0% {opacity: 1;}
+  50% {opacity: 0.4;}
+  100% {opacity: 1;}
 }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<div class="desktop">
 
-    <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+  <!-- ICONS -->
+  <div class="icon" onclick="openWindow('present')" style="position:absolute; top:20px; left:20px;">
+    🎁
+    <span>Present.exe</span>
+  </div>
 
-    <!-- FOTO -->
-    <img src="foto.jpeg" alt="Foto Ulang Tahun">
+  <div class="icon" onclick="playMusic()" style="position:absolute; top:120px; left:20px;">
+    🎵
+    <span>Music.mp3</span>
+  </div>
 
-    <!-- KUE -->
-    <div class="cake">
+  <div class="icon" onclick="openWindow('gallery')" style="position:absolute; top:220px; left:20px;">
+    📷
+    <span>Gallery.jpeg</span>
+  </div>
+
+  <!-- PRESENT WINDOW -->
+  <div class="window" id="present">
+    <div class="titlebar">Happy Birthday</div>
+    <div class="content">
+      <div class="cake">
         🎂 <span id="flame" class="flame">🔥</span>
+      </div>
+
+      <p>Klik lalu tiup dulu 🎈</p>
+
+      <button onclick="tiup()">Tiup Lilin</button>
+
+      <p id="ucapan" style="margin-top:15px;"></p>
     </div>
+  </div>
 
-    <p id="text">Klik tombol di bawah lalu tiup dulu 🎶</p>
-
-    <button onclick="tiupLilin()">Tiup Lilin</button>
+  <!-- GALLERY WINDOW -->
+  <div class="window" id="gallery">
+    <div class="titlebar">Foto Ulang Tahun</div>
+    <div class="content">
+      <img src="foto.jpeg" style="width:100%; border-radius:10px;">
+    </div>
+  </div>
 
 </div>
 
-<!-- MUSIK -->
-<audio id="music" src="music.mp3" preload="auto"></audio>
+<audio id="music" src="music.mp3"></audio>
 
 <script>
-function tiupLilin() {
-    // Matikan api
-    const flame = document.getElementById("flame");
-    if (flame) {
-        flame.style.display = "none";
-    }
+function openWindow(id) {
+  document.getElementById(id).style.display = "block";
+}
 
-    // Tampilkan ucapan
-    document.getElementById("text").innerText =
+function playMusic() {
+  document.getElementById("music").play();
+}
+
+function tiup() {
+  document.getElementById("flame").style.display = "none";
+  document.getElementById("music").play();
+
+  document.getElementById("ucapan").innerText =
 "SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE-25 🎂\n\n" +
 "Semoga panjang umur, sehat selalu, makin sukses ke depannya, dan terus semangat mengejar skripsinya.\n\n" +
 "Semoga juga pekerjaannya selalu dilancarkan.\n\n" +
 "Semangat terus Mbanya, jangan banyak stres ke depannya.\n\n" +
 "Amin!!! 🎉";
-
-    // Putar musik (user interaction = aman)
-    const audio = document.getElementById("music");
-    audio.currentTime = 0;
-    audio.play().catch(function () {
-        alert("Klik sekali lagi untuk memutar musik 🎶");
-    });
 }
 </script>
 
