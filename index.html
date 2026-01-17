@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Desktop Fixed</title>
+<title>Ultimate Birthday Desktop</title>
 <style>
 *{box-sizing:border-box;}
 body{margin:0;font-family:Segoe UI,Arial,sans-serif;color:#fff;overflow:hidden;
@@ -59,9 +59,24 @@ button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:
 <body>
 
 <div class="desktop">
+  <div class="icon active" id="iconMusic" onclick="openMusic()"><img src="https://cdn-icons-png.flaticon.com/512/716/716784.png"><span>Music</span></div>
   <div class="icon active" id="iconCake" onclick="openCake()"><img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"><span>Cake</span></div>
   <div class="icon" id="iconWish"><img src="https://cdn-icons-png.flaticon.com/512/942/942748.png"><span>Ucapan</span></div>
   <div class="icon" id="iconPhoto"><img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png"><span>Foto</span></div>
+</div>
+
+<!-- Music -->
+<div class="window" id="winMusic">
+  <div class="titlebar">
+    <div class="win-btn" onclick="minimize('winMusic')">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closeMusic()">✕</div>
+  </div>
+  <div class="content">
+    <h2>Denger lagu dulu 🎵</h2>
+    <button onclick="playMusic()">Play Music</button>
+    <button onclick="pauseMusic()">Pause Music</button>
+  </div>
 </div>
 
 <!-- Cake Window -->
@@ -103,7 +118,14 @@ button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:
   </div>
   <div class="content">
     <h2>🎉 SELAMAT ULANG TAHUN 🎉</h2>
-    <p>SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br>SEMOGA PANJANG UMUR, SEHAT, SUKSES, LANCAR SKRIPSI DAN PEKERJAAN!</p>
+    <p>
+      SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
+      SEMOGA PANJANG UMUR, SEHAT SELALU,<br>
+      MAKIN SUKSES KEDEPANNYA,<br>
+      LANCAR SKRIPSI DAN PEKERJAANNYA,<br><br>
+      JANGAN BANYAK STRESS 😄<br>
+      AMIN!!!
+    </p>
   </div>
 </div>
 
@@ -121,6 +143,8 @@ button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:
     <button onclick="printPhoto()">Cetak</button>
   </div>
 </div>
+
+<audio id="music" src="music.mp3"></audio>
 
 <script>
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
@@ -144,13 +168,19 @@ function prev(){idx=(idx-1+photos.length)%photos.length; photo.src=photos[idx];}
 function printPhoto(){let img=document.getElementById('photo');let w=window.open('');w.document.write('<img src="'+img.src+'" style="width:100%">'); w.print();}
 function unlock(id,fn){let el=document.getElementById(id);el.classList.add("active");el.onclick=fn;}
 
-// Make a Wish effects
+// Music
+function playMusic(){document.getElementById("music").play();}
+function pauseMusic(){document.getElementById("music").pause();}
+
+// Make a Wish
 function makeWish(){
   document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
   spawnConfetti(50);
   spawnFireworks();
   showPopupRandom();
 }
+
+// Confetti
 function spawnConfetti(n=50){
   for(let i=0;i<n;i++){
     let conf=document.createElement('div');
@@ -161,6 +191,8 @@ function spawnConfetti(n=50){
     setTimeout(()=>conf.remove(),3500);
   }
 }
+
+// Fireworks
 function spawnFireworks(){
   for(let i=0;i<10;i++){
     let fw=document.createElement('div');
@@ -174,6 +206,8 @@ function spawnFireworks(){
     setTimeout(()=>fw.remove(),1000);
   }
 }
+
+// Popup random
 function showPopupRandom(){
   let texts=['Wish Granted! 🎉','Happy Birthday! 🥳','Kamu keren! ✨'];
   for(let i=0;i<2;i++){
