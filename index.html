@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Desktop</title>
+<title>Mini Birthday Desktop</title>
 
 <style>
 *{box-sizing:border-box}
@@ -17,20 +17,20 @@ body{
 
 /* ================= DESKTOP ================= */
 .desktop{
-  padding:20px;
+  padding:15px;
 }
 .icon{
-  width:90px;
-  margin-bottom:22px;
+  width:70px;
+  margin-bottom:18px;
   text-align:center;
   cursor:pointer;
 }
-.icon img{width:64px;opacity:.35}
+.icon img{width:48px;opacity:.35}
 .icon.active img{opacity:1}
 .icon span{
   display:block;
-  font-size:14px;
-  margin-top:6px;
+  font-size:12px;
+  margin-top:4px;
 }
 
 /* ================= WINDOW ================= */
@@ -39,23 +39,24 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:600px;
+  width:400px;
   background:#121212;
   border-radius:10px;
-  box-shadow:0 0 30px rgba(0,0,0,.85);
+  box-shadow:0 0 20px rgba(0,0,0,.85);
   display:none;
 }
 
 .titlebar{
-  height:32px;
+  height:28px;
   background:#1f1f1f;
   display:flex;
   justify-content:flex-end;
   align-items:center;
   border-radius:10px 10px 0 0;
+  padding:0 5px;
 }
 .win-btn{
-  width:45px;
+  width:32px;
   height:100%;
   display:flex;
   align-items:center;
@@ -66,82 +67,80 @@ body{
 .close:hover{background:#c42b1c}
 
 .content{
-  padding:24px;
+  padding:16px;
   text-align:center;
 }
 
 button{
-  padding:10px 26px;
-  font-size:15px;
+  padding:6px 16px;
+  font-size:14px;
   border:none;
   border-radius:6px;
   background:#ff6f61;
   color:white;
   cursor:pointer;
-  margin-top:20px;
+  margin-top:12px;
 }
 
-/* ================= CAKE ================= */
+/* ================= MINI CAKE ================= */
 .cake-area{
   position:relative;
-  width:180px;          /* lebih kecil */
-  margin:24px auto 10px;
+  width:120px;
+  margin:16px auto;
 }
 
-/* Lilin */
 .candles{
   position:absolute;
-  top:-40px;            
+  top:-28px;            
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:25px;
+  gap:15px;
 }
 .candle{
-  width:8px;
-  height:35px;
+  width:6px;
+  height:25px;
   background:#ffffff;
   border-radius:3px;
   position:relative;
 }
 .flame{
   position:absolute;
-  top:-16px;
+  top:-12px;
   left:50%;
   transform:translateX(-50%);
-  width:10px;
-  height:14px;
+  width:8px;
+  height:10px;
   background:radial-gradient(circle at 50% 30%, #ffd700, #ff4500);
   border-radius:50%;
   animation:flicker 1s infinite;
 }
 @keyframes flicker{
   0%{transform:translateX(-50%) scale(1)}
-  50%{transform:translateX(-50%) scale(.85)}
+  50%{transform:translateX(-50%) scale(.8)}
   100%{transform:translateX(-50%) scale(1)}
 }
 
-/* Kue */
 .cake{width:100%}
 .layer{
-  height:50px;
-  margin-top:-10px;
-  border-radius:8px;
+  height:35px;
+  margin-top:-6px;
+  border-radius:6px;
 }
 .layer.top{background:#ffc8a2}
 .layer.middle{background:#ffb7b2}
 .layer.bottom{background:#ff9aa2}
 .icing{
-  height:10px;
+  height:6px;
   background:#ffffff;
-  border-radius:0 0 8px 8px;
+  border-radius:0 0 6px 6px;
 }
 
 /* ================= PHOTO ================= */
 #photoWin img{
-  max-width:50vw;
-  max-height:60vh;
-  border-radius:8px;
+  max-width:45vw;
+  max-height:55vh;
+  border-radius:6px;
   object-fit:contain;
 }
 </style>
@@ -177,43 +176,37 @@ button{
 <!-- ================= MUSIC ================= -->
 <div class="window" id="winMusic">
   <div class="titlebar">
-    <div class="win-btn">—</div>
+    <div class="win-btn" onclick="minimize('winMusic')">—</div>
     <div class="win-btn">▢</div>
     <div class="win-btn close" onclick="closeMusic()">✕</div>
   </div>
-  <div class="content">
+  <div class="content" id="musicContent">
     <h2>Denger lagu dulu 🎵</h2>
     <button onclick="playMusic()">Play Music</button>
   </div>
 </div>
 
-<!-- ================= CAKE ================= -->
+<!-- ================= MINI CAKE ================= -->
 <div class="window" id="winCake">
   <div class="titlebar">
-    <div class="win-btn">—</div>
+    <div class="win-btn" onclick="minimize('winCake')">—</div>
     <div class="win-btn">▢</div>
     <div class="win-btn close" onclick="closeCake()">✕</div>
   </div>
-
-  <div class="content">
+  <div class="content" id="cakeContent">
     <h2>🎂 Make a Wish 🎂</h2>
-
     <div class="cake-area">
-
       <div class="candles">
         <div class="candle"><div class="flame"></div></div>
         <div class="candle"><div class="flame"></div></div>
         <div class="candle"><div class="flame"></div></div>
       </div>
-
       <div class="cake">
         <div class="layer top"><div class="icing"></div></div>
         <div class="layer middle"></div>
         <div class="layer bottom"></div>
       </div>
-
     </div>
-
     <button onclick="makeWish()">Make a Wish</button>
   </div>
 </div>
@@ -221,11 +214,11 @@ button{
 <!-- ================= UCAPAN ================= -->
 <div class="window" id="winWish">
   <div class="titlebar">
-    <div class="win-btn">—</div>
+    <div class="win-btn" onclick="minimize('winWish')">—</div>
     <div class="win-btn">▢</div>
     <div class="win-btn close" onclick="closeWish()">✕</div>
   </div>
-  <div class="content">
+  <div class="content" id="wishContent">
     <h2>🎉 SELAMAT ULANG TAHUN 🎉</h2>
     <p>
       SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
@@ -241,11 +234,11 @@ button{
 <!-- ================= FOTO ================= -->
 <div class="window" id="photoWin">
   <div class="titlebar">
-    <div class="win-btn">—</div>
+    <div class="win-btn" onclick="minimize('photoWin')">—</div>
     <div class="win-btn">▢</div>
     <div class="win-btn close" onclick="closePhoto()">✕</div>
   </div>
-  <div class="content">
+  <div class="content" id="photoContent">
     <img id="photo" src="foto1.jpeg"><br>
     <button onclick="prev()">Prev</button>
     <button onclick="next()">Next</button>
@@ -277,10 +270,23 @@ function playMusic(){
   document.getElementById("music").play();
 }
 
+// Minimize: sembunyikan konten tapi titlebar tetap
+function minimize(id){
+  let win=document.getElementById(id);
+  let content=win.querySelector(".content");
+  if(content.style.display==="none"){
+    content.style.display="block";
+  } else {
+    content.style.display="none";
+  }
+}
+
+// Padamkan lilin
 function makeWish(){
   document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
 }
 
+// Foto galeri
 function next(){
   idx=(idx+1)%photos.length;
   photo.src=photos[idx];
@@ -290,6 +296,7 @@ function prev(){
   photo.src=photos[idx];
 }
 
+// Unlock icon setelah window selesai
 function unlock(id,fn){
   let el=document.getElementById(id);
   el.classList.add("active");
