@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>Birthday Desktop</title>
+
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at center, #02004a, #00002b);
+    font-family: Tahoma, Arial, sans-serif;
+    color: white;
+}
+
+.desktop {
+    position: absolute;
+    top: 50px;
+    left: 50px;
+    width: 80%;
+    height: 80%;
+    border: 2px solid #dcdcdc;
+    padding: 15px;
+    box-sizing: border-box;
+}
+
+.icon {
+    width: 90px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 12px;
+}
+
+.icon img {
+    width: 48px;
+    display: block;
+    margin: 0 auto 5px;
+}
+
+/* Window */
+.window {
+    display: none;
+    position: absolute;
+    top: 80px;
+    left: 200px;
+    width: 420px;
+    background: #f0f0f0;
+    color: black;
+    border: 2px solid #555;
+}
+
+.window-header {
+    background: #000080;
+    color: white;
+    padding: 6px;
+    font-size: 14px;
+}
+
+.window-body {
+    padding: 15px;
+    text-align: center;
+}
+
+/* Cake */
+.cake {
+    font-size: 90px;
+}
+
+.flame {
+    font-size: 40px;
+    animation: flicker 0.3s infinite alternate;
+}
+
+@keyframes flicker {
+    from { opacity: 1; }
+    to { opacity: 0.5; }
+}
+
+button {
+    padding: 8px 15px;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+/* Taskbar */
+.taskbar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    background: #c0c0c0;
+    display: flex;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+    color: black;
+}
+
+.start {
+    background: #e0e0e0;
+    border: 2px solid #ffffff;
+    padding: 3px 10px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="desktop">
+
+    <div class="icon" onclick="openPresent()">
+        <img src="https://cdn-icons-png.flaticon.com/512/4213/4213958.png">
+        Present.exe
+    </div>
+
+    <div class="icon" onclick="playMusic()">
+        <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png">
+        Music.mp3
+    </div>
+
+    <div class="icon" onclick="openCake()">
+        <img src="https://cdn-icons-png.flaticon.com/512/992/992754.png">
+        Cake.exe
+    </div>
+
+    <div class="icon" onclick="openGallery()">
+        <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png">
+        Gallery.jpg
+    </div>
+
+</div>
+
+<!-- Present -->
+<div id="present" class="window">
+    <div class="window-header">Present.exe</div>
+    <div class="window-body">
+        <h2>🎉 HAPPY BIRTHDAY 🎉</h2>
+        <p>Semoga panjang umur, sehat selalu, dan semua keinginannya tercapai.</p>
+    </div>
+</div>
+
+<!-- Cake -->
+<div id="cake" class="window">
+    <div class="window-header">Cake.exe</div>
+    <div class="window-body">
+        <div id="flame" class="flame">🔥</div>
+        <div class="cake">🎂</div>
+
+        <button onclick="blowCandle()">Tiup dulu</button>
+
+        <p id="wish" style="display:none; margin-top:10px;">
+            🎉 Wish kamu sudah tersampaikan 🎉
+        </p>
+    </div>
+</div>
+
+<!-- Gallery -->
+<div id="gallery" class="window">
+    <div class="window-header">Gallery.jpg</div>
+    <div class="window-body">
+        <img src="foto.jpg" style="width:100%; border-radius:10px;">
+    </div>
+</div>
+
+<audio id="music" src="music.mp3"></audio>
+
+<div class="taskbar">
+    <div class="start">Start</div>
+    Party.exe
+</div>
+
+<script>
+function hideAll() {
+    document.getElementById("present").style.display = "none";
+    document.getElementById("cake").style.display = "none";
+    document.getElementById("gallery").style.display = "none";
+}
+
+function openPresent() {
+    hideAll();
+    document.getElementById("present").style.display = "block";
+}
+
+function openCake() {
+    hideAll();
+    document.getElementById("cake").style.display = "block";
+}
+
+function openGallery() {
+    hideAll();
+    document.getElementById("gallery").style.display = "block";
+}
+
+function playMusic() {
+    document.getElementById("music").play();
+}
+
+function blowCandle() {
+    document.getElementById("flame").style.display = "none";
+    document.getElementById("wish").style.display = "block";
+}
+</script>
+
+</body>
+</html>
