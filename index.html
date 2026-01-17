@@ -13,13 +13,7 @@ body{
   overflow:hidden;
   color:white;
 }
-
-/* DESKTOP */
-.desktop{
-  width:100%;
-  height:100%;
-  position:relative;
-}
+.desktop{width:100%;height:100%;position:relative}
 
 /* ICON */
 .icon{
@@ -27,31 +21,26 @@ body{
   text-align:center;
   cursor:pointer;
   margin:20px;
-  user-select:none;
 }
-.icon span{
-  font-size:12px;
-  display:block;
-  margin-top:5px;
-}
+.icon span{font-size:12px;display:block}
 
 /* WINDOW */
 .window{
   position:absolute;
   top:50%;
   left:50%;
-  width:520px;
+  width:560px;
+  transform:translate(-50%,-50%);
   background:#f2f2f2;
   color:black;
   border:2px solid #000;
-  transform:translate(-50%,-50%);
   display:none;
   box-shadow:6px 6px 0 #000;
 }
-.small{width:320px;}
+.small{width:360px}
 .minimized .content{display:none}
 
-/* TITLE BAR */
+/* TITLEBAR */
 .titlebar{
   background:#000080;
   color:white;
@@ -59,93 +48,99 @@ body{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  font-size:14px;
+  cursor:move;
 }
-.controls{
-  display:flex;
-  gap:6px;
-}
-.ctrl{
-  width:16px;
-  height:16px;
-  border-radius:50%;
-  cursor:pointer;
-}
+.controls{display:flex;gap:6px}
+.ctrl{width:16px;height:16px;border-radius:50%;cursor:pointer}
 .min{background:#f1c40f}
 .resize{background:#2ecc71}
 .close{background:#e74c3c}
 
 /* CONTENT */
-.content{
-  padding:15px;
-  text-align:center;
-}
+.content{text-align:center;padding:15px}
 
 /* SLIDESHOW */
 .slideshow{
   width:100%;
-  height:220px;
-  overflow:hidden;
-  border-radius:10px;
+  height:260px;
+  background:black;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
 .slideshow img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
+  max-width:100%;
+  max-height:100%;
+  object-fit:contain;
 }
 
 /* CAKE */
 .cake{
   margin:15px auto;
-  width:180px;
-  height:110px;
-  background:#d18b47;
-  border-radius:0 0 20px 20px;
+  width:200px;
+  height:120px;
+  background:linear-gradient(#d08c4a,#b06b2c);
+  border-radius:0 0 25px 25px;
   position:relative;
 }
 .cake::before{
   content:"";
   position:absolute;
-  top:-25px;
+  top:-28px;
   width:100%;
-  height:35px;
-  background:#fff3e0;
-  border-radius:20px 20px 0 0;
+  height:38px;
+  background:linear-gradient(#fff,#ffe0c2);
+  border-radius:25px 25px 0 0;
 }
+
+/* CANDLE PREMIUM */
 .candle{
-  width:10px;
-  height:35px;
-  background:#4fc3f7;
+  width:14px;
+  height:55px;
+  background:
+    repeating-linear-gradient(
+      45deg,
+      #ff5fa2,
+      #ff5fa2 5px,
+      #ffffff 5px,
+      #ffffff 10px
+    );
   position:absolute;
-  top:-60px;
+  top:-75px;
   left:50%;
   transform:translateX(-50%);
+  border-radius:6px;
+  box-shadow:0 0 6px rgba(255,255,255,.6);
 }
+
+/* FLAME */
 .flame{
-  width:14px;
-  height:14px;
-  background:orange;
-  border-radius:50%;
+  width:18px;
+  height:28px;
+  background:radial-gradient(circle at 50% 60%, #fff176, #ff9800, #ff5722);
   position:absolute;
-  top:-16px;
-  left:-2px;
-  animation:flicker .25s infinite;
+  top:-28px;
+  left:50%;
+  transform:translateX(-50%);
+  border-radius:50%;
+  filter:drop-shadow(0 0 12px rgba(255,140,0,.9));
+  animation:flicker 0.18s infinite alternate;
 }
 @keyframes flicker{
-  0%{opacity:1}
-  50%{opacity:.5}
-  100%{opacity:1}
+  0%{transform:translateX(-50%) scale(1) rotate(-2deg);}
+  100%{transform:translateX(-50%) scale(0.9) rotate(2deg);}
 }
-.off{display:none}
+.off{animation:fadeOut .8s forwards}
+@keyframes fadeOut{to{opacity:0;transform:translateX(-50%) scale(0)}}
 
 button{
-  padding:8px 20px;
+  padding:8px 18px;
   border:none;
   border-radius:6px;
   background:#ff6f61;
   color:white;
   cursor:pointer;
-  margin-top:10px;
+  margin:6px;
 }
 </style>
 </head>
@@ -156,18 +151,15 @@ button{
 
   <!-- ICONS -->
   <div class="icon" style="position:absolute;top:20px;left:20px" onclick="openWin('present')">
-    🎁
-    <span>Present.exe</span>
+    🎁<span>Present.exe</span>
   </div>
 
   <div class="icon" style="position:absolute;top:120px;left:20px" onclick="openWin('gallery')">
-    📷
-    <span>Photos</span>
+    📷<span>Photos</span>
   </div>
 
-  <div class="icon" style="position:absolute;top:220px;left:20px" onclick="playMusic()">
-    🎵
-    <span>Music.mp3</span>
+  <div class="icon" style="position:absolute;top:220px;left:20px" onclick="toggleMusic()">
+    🎵<span>Music.mp3</span>
   </div>
 
   <!-- PRESENT WINDOW -->
@@ -187,16 +179,16 @@ button{
         </div>
       </div>
 
-      <button onclick="tiup()">Tiup Lilin</button>
+      <button onclick="tiup()">Tiup Lilin 🎂</button>
 
-      <p style="white-space:pre-line;margin-top:10px">
-SELAMAT ULANG TAHUN MBA LIMBZYY KE-25 🎉
+      <p style="white-space:pre-line">
+SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE-25 🎉
 
 Semoga panjang umur, sehat selalu,
 makin sukses ke depannya,
-skripsi & pekerjaan dilancarkan.
+skripsi & pekerjaannya dilancarkan.
 
-Jangan banyak stres.
+Jangan banyak stres ke depannya.
 AMIN!!!
       </p>
     </div>
@@ -214,7 +206,11 @@ AMIN!!!
     </div>
     <div class="content">
       <div class="slideshow">
-        <img id="slide" src="foto1.jpeg">
+        <img id="photo" src="foto1.jpeg">
+      </div>
+      <div>
+        <button onclick="prev()">◀ Prev</button>
+        <button onclick="next()">Next ▶</button>
       </div>
     </div>
   </div>
@@ -224,31 +220,33 @@ AMIN!!!
 <audio id="music" src="music.mp3"></audio>
 
 <script>
-/* WINDOW */
+/* WINDOW CONTROL */
 function openWin(id){document.getElementById(id).style.display="block"}
 function closeWin(id){document.getElementById(id).style.display="none"}
 function minimize(id){document.getElementById(id).classList.toggle("minimized")}
 function resizeWin(id){document.getElementById(id).classList.toggle("small")}
 
 /* MUSIC */
-function playMusic(){
+function toggleMusic(){
   const m=document.getElementById("music");
-  m.currentTime=0;
-  m.play();
+  m.paused ? m.play() : m.pause();
 }
 
-/* SLIDESHOW */
-let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
-let i=0;
-setInterval(()=>{
-  i=(i+1)%photos.length;
-  document.getElementById("slide").src=photos[i];
-},3000);
-
-/* CANDLE */
+/* LILIN */
 function tiup(){
   document.getElementById("flame").classList.add("off");
-  playMusic();
+}
+
+/* PHOTO SLIDE */
+let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
+let idx=0;
+function next(){
+  idx=(idx+1)%photos.length;
+  document.getElementById("photo").src=photos[idx];
+}
+function prev(){
+  idx=(idx-1+photos.length)%photos.length;
+  document.getElementById("photo").src=photos[idx];
 }
 </script>
 
