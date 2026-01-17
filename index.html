@@ -2,206 +2,115 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Desktop</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday</title>
 
 <style>
 body {
     margin: 0;
-    height: 100vh;
-    background: radial-gradient(circle at center, #02004a, #00002b);
-    font-family: Tahoma, Arial, sans-serif;
-    color: white;
-}
-
-.desktop {
-    position: absolute;
-    top: 50px;
-    left: 50px;
-    width: 80%;
-    height: 80%;
-    border: 2px solid #dcdcdc;
-    padding: 15px;
-    box-sizing: border-box;
-}
-
-.icon {
-    width: 90px;
-    margin-bottom: 20px;
-    cursor: pointer;
-    text-align: center;
-    font-size: 12px;
-}
-
-.icon img {
-    width: 48px;
-    display: block;
-    margin: 0 auto 5px;
-}
-
-/* Window */
-.window {
-    display: none;
-    position: absolute;
-    top: 80px;
-    left: 200px;
-    width: 420px;
-    background: #f0f0f0;
-    color: black;
-    border: 2px solid #555;
-}
-
-.window-header {
-    background: #000080;
-    color: white;
-    padding: 6px;
-    font-size: 14px;
-}
-
-.window-body {
-    padding: 15px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(180deg, #ffecd2, #fcb69f);
     text-align: center;
 }
 
-/* Cake */
+.container {
+    padding: 20px;
+}
+
+h1 {
+    margin-top: 10px;
+}
+
+img {
+    width: 85%;
+    max-width: 320px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
 .cake {
-    font-size: 90px;
+    font-size: 110px;
+    margin-top: 20px;
 }
 
 .flame {
-    font-size: 40px;
-    animation: flicker 0.3s infinite alternate;
+    animation: flicker 0.8s infinite;
 }
 
 @keyframes flicker {
-    from { opacity: 1; }
-    to { opacity: 0.5; }
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
 }
 
 button {
-    padding: 8px 15px;
-    margin-top: 10px;
+    margin-top: 25px;
+    padding: 12px 28px;
+    font-size: 16px;
+    border: none;
+    border-radius: 10px;
+    background-color: #ff6f61;
+    color: #fff;
     cursor: pointer;
 }
 
-/* Taskbar */
-.taskbar {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 35px;
-    background: #c0c0c0;
-    display: flex;
-    align-items: center;
-    padding: 0 10px;
-    box-sizing: border-box;
-    color: black;
+button:active {
+    transform: scale(0.98);
 }
 
-.start {
-    background: #e0e0e0;
-    border: 2px solid #ffffff;
-    padding: 3px 10px;
-    font-weight: bold;
-    margin-right: 10px;
+#text {
+    margin-top: 20px;
+    white-space: pre-line;
+    font-size: 16px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="desktop">
+<div class="container">
 
-    <div class="icon" onclick="openPresent()">
-        <img src="https://cdn-icons-png.flaticon.com/512/4213/4213958.png">
-        Present.exe
+    <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
+
+    <!-- FOTO -->
+    <img src="foto.jpeg" alt="Foto Ulang Tahun">
+
+    <!-- KUE -->
+    <div class="cake">
+        🎂 <span id="flame" class="flame">🔥</span>
     </div>
 
-    <div class="icon" onclick="playMusic()">
-        <img src="https://cdn-icons-png.flaticon.com/512/727/727245.png">
-        Music.mp3
-    </div>
+    <p id="text">Klik tombol di bawah lalu tiup dulu 🎶</p>
 
-    <div class="icon" onclick="openCake()">
-        <img src="https://cdn-icons-png.flaticon.com/512/992/992754.png">
-        Cake.exe
-    </div>
-
-    <div class="icon" onclick="openGallery()">
-        <img src="https://cdn-icons-png.flaticon.com/512/685/685655.png">
-        Gallery.jpg
-    </div>
+    <button onclick="tiupLilin()">Tiup Lilin</button>
 
 </div>
 
-<!-- Present -->
-<div id="present" class="window">
-    <div class="window-header">Present.exe</div>
-    <div class="window-body">
-        <h2>🎉 HAPPY BIRTHDAY 🎉</h2>
-        <p>Semoga panjang umur, sehat selalu, dan semua keinginannya tercapai.</p>
-    </div>
-</div>
-
-<!-- Cake -->
-<div id="cake" class="window">
-    <div class="window-header">Cake.exe</div>
-    <div class="window-body">
-        <div id="flame" class="flame">🔥</div>
-        <div class="cake">🎂</div>
-
-        <button onclick="blowCandle()">Tiup dulu</button>
-
-        <p id="wish" style="display:none; margin-top:10px;">
-            🎉 Wish kamu sudah tersampaikan 🎉
-        </p>
-    </div>
-</div>
-
-<!-- Gallery -->
-<div id="gallery" class="window">
-    <div class="window-header">Gallery.jpg</div>
-    <div class="window-body">
-        <img src="foto.jpg" style="width:100%; border-radius:10px;">
-    </div>
-</div>
-
-<audio id="music" src="music.mp3"></audio>
-
-<div class="taskbar">
-    <div class="start">Start</div>
-    Party.exe
-</div>
+<!-- MUSIK -->
+<audio id="music" src="music.mp3" preload="auto"></audio>
 
 <script>
-function hideAll() {
-    document.getElementById("present").style.display = "none";
-    document.getElementById("cake").style.display = "none";
-    document.getElementById("gallery").style.display = "none";
-}
+function tiupLilin() {
+    // Matikan api
+    const flame = document.getElementById("flame");
+    if (flame) {
+        flame.style.display = "none";
+    }
 
-function openPresent() {
-    hideAll();
-    document.getElementById("present").style.display = "block";
-}
+    // Tampilkan ucapan
+    document.getElementById("text").innerText =
+"SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE-25 🎂\n\n" +
+"Semoga panjang umur, sehat selalu, makin sukses ke depannya, dan terus semangat mengejar skripsinya.\n\n" +
+"Semoga juga pekerjaannya selalu dilancarkan.\n\n" +
+"Semangat terus Mbanya, jangan banyak stres ke depannya.\n\n" +
+"Amin!!! 🎉";
 
-function openCake() {
-    hideAll();
-    document.getElementById("cake").style.display = "block";
-}
-
-function openGallery() {
-    hideAll();
-    document.getElementById("gallery").style.display = "block";
-}
-
-function playMusic() {
-    document.getElementById("music").play();
-}
-
-function blowCandle() {
-    document.getElementById("flame").style.display = "none";
-    document.getElementById("wish").style.display = "block";
+    // Putar musik (user interaction = aman)
+    const audio = document.getElementById("music");
+    audio.currentTime = 0;
+    audio.play().catch(function () {
+        alert("Klik sekali lagi untuk memutar musik 🎶");
+    });
 }
 </script>
 
