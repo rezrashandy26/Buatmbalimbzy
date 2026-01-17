@@ -144,7 +144,8 @@ button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:
   </div>
 </div>
 
-<audio id="music" src="music.mp3" autoplay loop></audio>
+<!-- Musik -->
+<audio id="music" src="music.mp3" loop></audio>
 
 <script>
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
@@ -168,9 +169,13 @@ function prev(){idx=(idx-1+photos.length)%photos.length; photo.src=photos[idx];}
 function printPhoto(){let img=document.getElementById('photo');let w=window.open('');w.document.write('<img src="'+img.src+'" style="width:100%">'); w.print();}
 function unlock(id,fn){let el=document.getElementById(id);el.classList.add("active");el.onclick=fn;}
 
-// Music controls
-function playMusic(){document.getElementById("music").play();}
-function pauseMusic(){document.getElementById("music").pause();}
+// Music controls (autoplay after user interaction)
+const music = document.getElementById("music");
+function playMusic(){music.play();}
+function pauseMusic(){music.pause();}
+
+// Auto play musik setelah klik pertama desktop
+document.querySelector(".desktop").addEventListener("click", ()=>{music.play();}, {once:true});
 
 // Make a Wish
 function makeWish(){
