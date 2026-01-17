@@ -2,168 +2,188 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday</title>
+<title>Birthday Desktop</title>
 
 <style>
 body{
-    margin:0;
-    background:linear-gradient(120deg,#141E30,#243B55);
-    font-family:Arial,sans-serif;
-    color:white;
-    height:100vh;
-}
-
-.desktop{
-    width:100%;
-    height:100%;
-    display:flex;
-    justify-content:center;
-    align-items:center;
+  margin:0;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  font-family:Arial,Helvetica,sans-serif;
+  height:100vh;
+  overflow:hidden;
+  color:white;
 }
 
 .window{
-    width:90%;
-    height:90%;
-    background:rgba(0,0,0,0.45);
-    border-radius:12px;
-    display:flex;
-    flex-direction:column;
+  position:absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:520px;
+  background:#111;
+  border-radius:10px;
+  box-shadow:0 0 25px rgba(0,0,0,.8);
 }
 
 .titlebar{
-    height:35px;
-    background:#222;
-    display:flex;
-    justify-content:flex-end;
-    align-items:center;
-    padding-right:10px;
-    gap:8px;
+  height:32px;
+  background:#222;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  padding-right:10px;
 }
 
-.dot{width:14px;height:14px;border-radius:50%}
-.red{background:red}
-.yellow{background:orange}
-.green{background:lime}
+.close{
+  width:14px;
+  height:14px;
+  background:#ff5f56;
+  border-radius:50%;
+  cursor:pointer;
+}
 
 .content{
-    flex:1;
-    text-align:center;
-    padding:20px;
+  padding:22px;
+  text-align:center;
 }
 
 button{
-    padding:12px 25px;
-    font-size:16px;
-    border:none;
-    border-radius:8px;
-    cursor:pointer;
-    margin:10px;
+  padding:10px 22px;
+  border:none;
+  border-radius:8px;
+  background:#ff6f61;
+  color:white;
+  cursor:pointer;
+  margin-top:12px;
+  font-size:15px;
 }
 
 .hidden{display:none}
 
-#cake img{
-    max-width:320px;
+#cake{
+  width:260px;
+  object-fit:contain;
 }
 
 #flame{
-    font-size:40px;
-    animation:flicker 1s infinite;
+  font-size:34px;
+  margin-top:6px;
+  animation:flicker 1s infinite;
 }
 
 @keyframes flicker{
-    0%{opacity:1}
-    50%{opacity:0.4}
-    100%{opacity:1}
+  0%{opacity:1}
+  50%{opacity:0.4}
+  100%{opacity:1}
 }
 
-#photo{
-    max-width:50vw;
-    max-height:60vh;
-    object-fit:contain;
-    border-radius:10px;
+#photoWin img{
+  max-width:50vw;
+  max-height:60vh;
+  object-fit:contain;
+  border-radius:8px;
 }
 </style>
 </head>
 
 <body>
 
-<div class="desktop">
-<div class="window">
-
-    <div class="titlebar">
-        <div class="dot red"></div>
-        <div class="dot yellow"></div>
-        <div class="dot green"></div>
-    </div>
-
-    <div class="content">
-
-        <!-- STEP 1 -->
-        <div id="step1">
-            <h2>DENGER LAGU DULU 🎵</h2>
-            <button onclick="playMusic()">Play Music</button>
-        </div>
-
-        <!-- STEP 2 -->
-        <div id="step2" class="hidden">
-            <h2>TIUP LILIN & MAKE A WISH 🎂</h2>
-            <div id="cake">
-                <img src="cake.png">
-                <div id="flame">🕯️🕯️🕯️</div>
-            </div>
-            <button onclick="blow()">Tiup Lilin</button>
-        </div>
-
-        <!-- STEP 3 -->
-        <div id="step3" class="hidden">
-            <h2>🎉 SELAMAT ULANG TAHUN 🎉</h2>
-
-            <p>
-            SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,  
-            SEMOGA PANJANG UMUR SEHAT SELALU,  
-            MAKIN SUKSES KEDEPANNYA DAN TERUS SEMANGAT  
-            MENGEJAR SKRIPSIANNYA DAN PEKERJAANNYA  
-            DI LANCARKAN, JANGAN BANYAK STRESS  
-            AMINNN!!!
-            </p>
-
-            <img id="photo" src="foto1.jpeg"><br>
-
-            <button onclick="prev()">Prev</button>
-            <button onclick="next()">Next</button>
-        </div>
-
-    </div>
-</div>
+<!-- WINDOW 1 : MUSIC -->
+<div class="window" id="winMusic">
+  <div class="titlebar">
+    <div class="close" onclick="closeMusic()"></div>
+  </div>
+  <div class="content">
+    <h2>Denger lagu dulu 🎵</h2>
+    <button onclick="playMusic()">Play Music</button>
+  </div>
 </div>
 
-<audio id="music" src="music.mpe3"></audio>
+<!-- WINDOW 2 : CAKE -->
+<div class="window hidden" id="winCake">
+  <div class="titlebar">
+    <div class="close" onclick="closeCake()"></div>
+  </div>
+  <div class="content">
+    <h2>Make a Wish 🎂</h2>
+    <img src="cake.jpeg" id="cake"><br>
+    <div id="flame">🕯️ 🕯️ 🕯️</div>
+    <button onclick="makeWish()">Make a Wish</button>
+  </div>
+</div>
+
+<!-- WINDOW 3 : UCAPAN -->
+<div class="window hidden" id="winWish">
+  <div class="titlebar">
+    <div class="close" onclick="closeWish()"></div>
+  </div>
+  <div class="content">
+    <h2>🎉 Selamat Ulang Tahun 🎉</h2>
+    <p>
+    SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
+    SEMOGA PANJANG UMUR, SEHAT SELALU,<br>
+    MAKIN SUKSES KEDEPANNYA,<br>
+    TERUS SEMANGAT MENGEJAR SKRIPSIANNYA,<br>
+    DAN PEKERJAANNYA DILANCARKAN,<br>
+    JANGAN BANYAK STRESS,<br>
+    AMINNN!!!
+    </p>
+  </div>
+</div>
+
+<!-- WINDOW 4 : PHOTO -->
+<div class="window hidden" id="photoWin">
+  <div class="titlebar">
+    <div class="close" onclick="closePhoto()"></div>
+  </div>
+  <div class="content">
+    <img id="photo" src="foto1.jpeg"><br>
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
+  </div>
+</div>
+
+<audio id="music" src="music.mp3"></audio>
 
 <script>
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
-let i=0;
+let idx=0;
 
+/* MUSIC */
 function playMusic(){
-    document.getElementById("music").play();
-    document.getElementById("step1").classList.add("hidden");
-    document.getElementById("step2").classList.remove("hidden");
+  document.getElementById("music").play();
+}
+function closeMusic(){
+  document.getElementById("winMusic").classList.add("hidden");
+  document.getElementById("winCake").classList.remove("hidden");
 }
 
-function blow(){
-    document.getElementById("flame").style.display="none";
-    document.getElementById("step2").classList.add("hidden");
-    document.getElementById("step3").classList.remove("hidden");
+/* CAKE */
+function makeWish(){
+  document.getElementById("flame").style.display="none";
+}
+function closeCake(){
+  document.getElementById("winCake").classList.add("hidden");
+  document.getElementById("winWish").classList.remove("hidden");
 }
 
+/* UCAPAN */
+function closeWish(){
+  document.getElementById("winWish").classList.add("hidden");
+  document.getElementById("photoWin").classList.remove("hidden");
+}
+
+/* PHOTO */
 function next(){
-    i=(i+1)%photos.length;
-    document.getElementById("photo").src=photos[i];
+  idx=(idx+1)%photos.length;
+  document.getElementById("photo").src=photos[idx];
 }
-
 function prev(){
-    i=(i-1+photos.length)%photos.length;
-    document.getElementById("photo").src=photos[i];
+  idx=(idx-1+photos.length)%photos.length;
+  document.getElementById("photo").src=photos[idx];
+}
+function closePhoto(){
+  document.getElementById("photoWin").classList.add("hidden");
 }
 </script>
 
