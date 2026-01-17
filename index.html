@@ -41,7 +41,7 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:540px;
+  width:560px;
   background:#111;
   border-radius:8px;
   box-shadow:0 0 25px rgba(0,0,0,.8);
@@ -79,40 +79,40 @@ button{
   background:#ff6f61;
   color:white;
   cursor:pointer;
-  margin-top:12px;
+  margin-top:14px;
   font-size:15px;
 }
 
 /* ================= CAKE ================= */
 .cake-box{
   position:relative;
-  width:300px;
-  margin:0 auto;
+  width:380px;        /* KUE LEBIH BESAR */
+  margin:20px auto;
 }
 .cake-box img{
   width:100%;
   display:block;
 }
 
-/* CANDLES */
+/* CANDLE */
 .candle{
   position:absolute;
-  width:8px;
-  height:40px;
-  background:white;
-  top:20px;
-  border-radius:2px;
+  width:10px;
+  height:45px;
+  background:#fff;
+  border-radius:3px;
+  top:55px;           /* POSISI DI ATAS KUE */
 }
-.c1{left:90px}
-.c2{left:145px}
-.c3{left:200px}
+.c1{left:120px}
+.c2{left:185px}
+.c3{left:250px}
 
 /* FLAME */
 .flame{
   position:absolute;
-  top:-18px;
+  top:-22px;
   left:-6px;
-  font-size:22px;
+  font-size:24px;
   animation:flicker 1s infinite;
 }
 @keyframes flicker{
@@ -135,6 +135,7 @@ button{
 
 <!-- ================= DESKTOP ================= -->
 <div class="desktop">
+
   <div class="icon active" id="iconMusic" onclick="openMusic()">
     <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
     <span>Music</span>
@@ -154,9 +155,10 @@ button{
     <img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png">
     <span>Foto</span>
   </div>
+
 </div>
 
-<!-- ================= MUSIC ================= -->
+<!-- ================= MUSIC WINDOW ================= -->
 <div class="window" id="winMusic">
   <div class="titlebar">
     <div class="win-btn">—</div>
@@ -169,7 +171,7 @@ button{
   </div>
 </div>
 
-<!-- ================= CAKE ================= -->
+<!-- ================= CAKE WINDOW ================= -->
 <div class="window" id="winCake">
   <div class="titlebar">
     <div class="win-btn">—</div>
@@ -191,7 +193,7 @@ button{
   </div>
 </div>
 
-<!-- ================= UCAPAN ================= -->
+<!-- ================= UCAPAN WINDOW ================= -->
 <div class="window" id="winWish">
   <div class="titlebar">
     <div class="win-btn">—</div>
@@ -212,7 +214,7 @@ button{
   </div>
 </div>
 
-<!-- ================= FOTO ================= -->
+<!-- ================= FOTO WINDOW ================= -->
 <div class="window" id="photoWin">
   <div class="titlebar">
     <div class="win-btn">—</div>
@@ -232,7 +234,7 @@ button{
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
 let i=0;
 
-/* OPEN */
+/* OPEN WINDOWS */
 function openMusic(){show("winMusic")}
 function openCake(){show("winCake")}
 function openWish(){show("winWish")}
@@ -240,19 +242,38 @@ function openPhoto(){show("photoWin")}
 function show(id){document.getElementById(id).style.display="block"}
 function hide(id){document.getElementById(id).style.display="none"}
 
-/* FLOW */
-function playMusic(){document.getElementById("music").play()}
-function closeMusic(){hide("winMusic");unlock("iconCake",openCake)}
+/* FLOW CONTROL */
+function playMusic(){
+  document.getElementById("music").play();
+}
+function closeMusic(){
+  hide("winMusic");
+  unlock("iconCake",openCake);
+}
 function makeWish(){
   document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
 }
-function closeCake(){hide("winCake");unlock("iconWish",openWish)}
-function closeWish(){hide("winWish");unlock("iconPhoto",openPhoto)}
-function closePhoto(){hide("photoWin")}
+function closeCake(){
+  hide("winCake");
+  unlock("iconWish",openWish);
+}
+function closeWish(){
+  hide("winWish");
+  unlock("iconPhoto",openPhoto);
+}
+function closePhoto(){
+  hide("photoWin");
+}
 
-/* PHOTO */
-function next(){i=(i+1)%photos.length;photo.src=photos[i]}
-function prev(){i=(i-1+photos.length)%photos.length;photo.src=photos[i]}
+/* PHOTO CONTROL */
+function next(){
+  i=(i+1)%photos.length;
+  photo.src=photos[i];
+}
+function prev(){
+  i=(i-1+photos.length)%photos.length;
+  photo.src=photos[i];
+}
 
 /* UNLOCK ICON */
 function unlock(id,fn){
