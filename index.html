@@ -85,32 +85,32 @@ button{
 /* ================= MINI CAKE ================= */
 .cake-area{
   position:relative;
-  width:120px;
+  width:90px;        /* lebih kecil */
   margin:16px auto;
 }
 
 .candles{
   position:absolute;
-  top:-28px;            
+  top:-24px;            
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:15px;
+  gap:10px;
 }
 .candle{
-  width:6px;
-  height:25px;
-  background:#ffffff;
+  width:5px;
+  height:20px;
+  background:#fff;
   border-radius:3px;
   position:relative;
 }
 .flame{
   position:absolute;
-  top:-12px;
+  top:-8px;
   left:50%;
   transform:translateX(-50%);
-  width:8px;
-  height:10px;
+  width:6px;
+  height:8px;
   background:radial-gradient(circle at 50% 30%, #ffd700, #ff4500);
   border-radius:50%;
   animation:flicker 1s infinite;
@@ -123,17 +123,54 @@ button{
 
 .cake{width:100%}
 .layer{
-  height:35px;
-  margin-top:-6px;
+  height:25px;
+  margin-top:-5px;
   border-radius:6px;
+  position:relative;
 }
-.layer.top{background:#ffc8a2}
-.layer.middle{background:#ffb7b2}
-.layer.bottom{background:#ff9aa2}
+.layer.top{background:linear-gradient(#ffd4c4,#ffc1a1)}
+.layer.middle{background:linear-gradient(#ffb7b2,#ffa1a5)}
+.layer.bottom{background:linear-gradient(#ff9aa2,#ff7f8f)}
+
+/* Icing drip effect */
 .icing{
-  height:6px;
-  background:#ffffff;
+  height:5px;
+  background:#fff;
   border-radius:0 0 6px 6px;
+  position:relative;
+}
+.icing::after{
+  content:"";
+  position:absolute;
+  width:4px;
+  height:5px;
+  background:#fff;
+  border-radius:50%;
+  left:8px;
+  bottom:-5px;
+}
+.icing::before{
+  content:"";
+  position:absolute;
+  width:4px;
+  height:5px;
+  background:#fff;
+  border-radius:50%;
+  right:8px;
+  bottom:-5px;
+}
+
+/* Cherry */
+.cherry{
+  position:absolute;
+  top:-6px;
+  left:50%;
+  transform:translateX(-50%);
+  width:8px;
+  height:8px;
+  background:red;
+  border-radius:50%;
+  box-shadow:0 2px 2px rgba(0,0,0,0.3);
 }
 
 /* ================= PHOTO ================= */
@@ -202,7 +239,7 @@ button{
         <div class="candle"><div class="flame"></div></div>
       </div>
       <div class="cake">
-        <div class="layer top"><div class="icing"></div></div>
+        <div class="layer top"><div class="icing"></div><div class="cherry"></div></div>
         <div class="layer middle"></div>
         <div class="layer bottom"></div>
       </div>
