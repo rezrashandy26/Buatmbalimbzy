@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Mini Birthday Desktop</title>
+<title>Birthday Desktop with Cake Image</title>
 
 <style>
 *{box-sizing:border-box}
@@ -82,92 +82,18 @@ button{
   margin-top:12px;
 }
 
-/* ================= MINI CAKE HORIZONTAL ================= */
-.cake-area{
-  position:relative;
-  width:70px;        /* lebih kecil agar muat samping tulisan */
-  margin:0;
-}
-
-.candles{
-  position:absolute;
-  top:-18px;            
-  left:50%;
-  transform:translateX(-50%);
+/* ================= CAKE IMAGE ================= */
+.cake-container{
   display:flex;
-  gap:8px;
+  align-items:center;
+  justify-content:center;
+  gap:15px;
 }
-.candle{
-  width:4px;
-  height:18px;
-  background:#fff;
-  border-radius:3px;
-  position:relative;
-}
-.flame{
-  position:absolute;
-  top:-6px;
-  left:50%;
-  transform:translateX(-50%);
-  width:5px;
-  height:6px;
-  background:radial-gradient(circle at 50% 30%, #ffd700, #ff4500);
-  border-radius:50%;
-  animation:flicker 1s infinite;
-}
-@keyframes flicker{
-  0%{transform:translateX(-50%) scale(1)}
-  50%{transform:translateX(-50%) scale(.8)}
-  100%{transform:translateX(-50%) scale(1)}
-}
-
-.cake{width:100%}
-.layer{
-  height:20px;
-  margin-top:-4px;
-  border-radius:5px;
-  position:relative;
-}
-.layer.top{background:linear-gradient(#ffd4c4,#ffc1a1)}
-.layer.middle{background:linear-gradient(#ffb7b2,#ffa1a5)}
-.layer.bottom{background:linear-gradient(#ff9aa2,#ff7f8f)}
-
-.icing{
-  height:4px;
-  background:#fff;
-  border-radius:0 0 5px 5px;
-  position:relative;
-}
-.icing::after, .icing::before{
-  content:"";
-  position:absolute;
-  width:3px;
-  height:4px;
-  background:#fff;
-  border-radius:50%;
-  bottom:-4px;
-}
-.icing::after{left:6px;}
-.icing::before{right:6px;}
-
-.cherry{
-  position:absolute;
-  top:-5px;
-  left:50%;
-  transform:translateX(-50%);
-  width:6px;
-  height:6px;
-  background:red;
-  border-radius:50%;
-  box-shadow:0 1px 1px rgba(0,0,0,0.3);
-}
-
-/* ================= PHOTO ================= */
-#photoWin img{
-  max-width:45vw;
-  max-height:55vh;
+.cake-container img{
+  width:90px;   /* ukuran kecil agar muat di samping tulisan */
+  height:auto;
   border-radius:6px;
-  object-fit:contain;
+  box-shadow:0 2px 5px rgba(0,0,0,0.5);
 }
 </style>
 </head>
@@ -212,7 +138,7 @@ button{
   </div>
 </div>
 
-<!-- ================= MINI CAKE HORIZONTAL ================= -->
+<!-- ================= CAKE IMAGE ================= -->
 <div class="window" id="winCake">
   <div class="titlebar">
     <div class="win-btn" onclick="minimize('winCake')">—</div>
@@ -220,27 +146,15 @@ button{
     <div class="win-btn close" onclick="closeCake()">✕</div>
   </div>
   <div class="content" id="cakeContent">
-    <div style="display:flex; align-items:center; justify-content:center; gap:15px;">
-      <!-- Kue di samping -->
-      <div class="cake-area">
-        <div class="candles">
-          <div class="candle"><div class="flame"></div></div>
-          <div class="candle"><div class="flame"></div></div>
-          <div class="candle"><div class="flame"></div></div>
-        </div>
-        <div class="cake">
-          <div class="layer top"><div class="icing"></div><div class="cherry"></div></div>
-          <div class="layer middle"></div>
-          <div class="layer bottom"></div>
-        </div>
-      </div>
-      <!-- Tulisan di samping -->
+    <div class="cake-container">
+      <!-- Ganti src dengan link gambar kue kamu -->
+      <img src="cake.png" alt="Birthday Cake">
       <div style="text-align:left; max-width:200px;">
         <h2>🎂 Make a Wish 🎂</h2>
         <p>Tiup lilin dan buat harapanmu!</p>
       </div>
     </div>
-    <button onclick="makeWish()" style="margin-top:15px;">Make a Wish</button>
+    <button onclick="alert('Lilin dipadamkan! Harapanmu sudah dibuat 🎉')" style="margin-top:15px;">Make a Wish</button>
   </div>
 </div>
 
@@ -312,11 +226,6 @@ function minimize(id){
   } else {
     content.style.display="none";
   }
-}
-
-// Padamkan lilin
-function makeWish(){
-  document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
 }
 
 // Foto galeri
