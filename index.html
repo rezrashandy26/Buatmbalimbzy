@@ -14,7 +14,7 @@ body{
   color:white;
 }
 
-/* DESKTOP ICON */
+/* ================= DESKTOP ICON ================= */
 .desktop{
   padding:20px;
 }
@@ -35,71 +35,106 @@ body{
   font-size:14px;
 }
 
-/* WINDOW */
+/* ================= WINDOW ================= */
 .window{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:520px;
+  width:540px;
   background:#111;
-  border-radius:10px;
+  border-radius:8px;
   box-shadow:0 0 25px rgba(0,0,0,.8);
   display:none;
 }
 
+/* TITLEBAR WINDOWS STYLE */
 .titlebar{
   height:32px;
-  background:#222;
+  background:#1e1e1e;
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  padding-right:10px;
 }
-.close{
-  width:14px;
-  height:14px;
-  background:#ff5f56;
-  border-radius:50%;
+.win-btn{
+  width:45px;
+  height:100%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
   cursor:pointer;
 }
+.win-btn:hover{background:#333}
+.close:hover{background:#c42b1c}
+
 .content{
-  padding:20px;
+  padding:22px;
   text-align:center;
 }
+
 button{
   padding:10px 22px;
   border:none;
-  border-radius:8px;
+  border-radius:6px;
   background:#ff6f61;
   color:white;
   cursor:pointer;
-  margin-top:10px;
+  margin-top:12px;
+  font-size:15px;
 }
 
-#cake{width:260px}
-#flame{
-  font-size:34px;
+/* ================= CAKE ================= */
+.cake-box{
+  position:relative;
+  width:300px;
+  margin:0 auto;
+}
+.cake-box img{
+  width:100%;
+  display:block;
+}
+
+/* CANDLES */
+.candle{
+  position:absolute;
+  width:8px;
+  height:40px;
+  background:white;
+  top:20px;
+  border-radius:2px;
+}
+.c1{left:90px}
+.c2{left:145px}
+.c3{left:200px}
+
+/* FLAME */
+.flame{
+  position:absolute;
+  top:-18px;
+  left:-6px;
+  font-size:22px;
   animation:flicker 1s infinite;
 }
 @keyframes flicker{
   0%{opacity:1}
-  50%{opacity:0.4}
+  50%{opacity:.5}
   100%{opacity:1}
 }
 
+/* ================= PHOTO ================= */
 #photoWin img{
   max-width:50vw;
   max-height:60vh;
+  object-fit:contain;
+  border-radius:8px;
 }
 </style>
 </head>
 
 <body>
 
-<!-- DESKTOP -->
+<!-- ================= DESKTOP ================= -->
 <div class="desktop">
-
   <div class="icon active" id="iconMusic" onclick="openMusic()">
     <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
     <span>Music</span>
@@ -119,49 +154,71 @@ button{
     <img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png">
     <span>Foto</span>
   </div>
-
 </div>
 
-<!-- MUSIC -->
+<!-- ================= MUSIC ================= -->
 <div class="window" id="winMusic">
-  <div class="titlebar"><div class="close" onclick="closeMusic()"></div></div>
+  <div class="titlebar">
+    <div class="win-btn">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closeMusic()">✕</div>
+  </div>
   <div class="content">
     <h2>Denger lagu dulu 🎵</h2>
     <button onclick="playMusic()">Play Music</button>
   </div>
 </div>
 
-<!-- CAKE -->
+<!-- ================= CAKE ================= -->
 <div class="window" id="winCake">
-  <div class="titlebar"><div class="close" onclick="closeCake()"></div></div>
+  <div class="titlebar">
+    <div class="win-btn">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closeCake()">✕</div>
+  </div>
   <div class="content">
     <h2>Make a Wish 🎂</h2>
-    <img src="cake.jpeg" id="cake"><br>
-    <div id="flame">🕯️🕯️🕯️</div>
+
+    <div class="cake-box">
+      <img src="cake.jpeg">
+
+      <div class="candle c1"><div class="flame">🔥</div></div>
+      <div class="candle c2"><div class="flame">🔥</div></div>
+      <div class="candle c3"><div class="flame">🔥</div></div>
+    </div>
+
     <button onclick="makeWish()">Make a Wish</button>
   </div>
 </div>
 
-<!-- UCAPAN -->
+<!-- ================= UCAPAN ================= -->
 <div class="window" id="winWish">
-  <div class="titlebar"><div class="close" onclick="closeWish()"></div></div>
+  <div class="titlebar">
+    <div class="win-btn">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closeWish()">✕</div>
+  </div>
   <div class="content">
     <h2>🎉 Selamat Ulang Tahun 🎉</h2>
     <p>
-    SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
-    SEMOGA PANJANG UMUR SEHAT SELALU,<br>
-    MAKIN SUKSES KEDEPANNYA,<br>
-    TERUS SEMANGAT MENGEJAR SKRIPSIANNYA,<br>
-    DAN PEKERJAANNYA DILANCARKAN,<br>
-    JANGAN BANYAK STRESS,<br>
-    AMINNN!!!
+      SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
+      SEMOGA PANJANG UMUR SEHAT SELALU,<br>
+      MAKIN SUKSES KEDEPANNYA,<br>
+      TERUS SEMANGAT MENGEJAR SKRIPSIANNYA,<br>
+      DAN PEKERJAANNYA DILANCARKAN,<br>
+      JANGAN BANYAK STRESS,<br>
+      AMINNN!!!
     </p>
   </div>
 </div>
 
-<!-- FOTO -->
+<!-- ================= FOTO ================= -->
 <div class="window" id="photoWin">
-  <div class="titlebar"><div class="close" onclick="closePhoto()"></div></div>
+  <div class="titlebar">
+    <div class="win-btn">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closePhoto()">✕</div>
+  </div>
   <div class="content">
     <img id="photo" src="foto1.jpeg"><br>
     <button onclick="prev()">Prev</button>
@@ -175,55 +232,33 @@ button{
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
 let i=0;
 
-/* ICON OPEN */
+/* OPEN */
 function openMusic(){show("winMusic")}
 function openCake(){show("winCake")}
 function openWish(){show("winWish")}
 function openPhoto(){show("photoWin")}
-
 function show(id){document.getElementById(id).style.display="block"}
 function hide(id){document.getElementById(id).style.display="none"}
 
-/* MUSIC */
-function playMusic(){
-  document.getElementById("music").play();
-}
-function closeMusic(){
-  hide("winMusic");
-  activate("iconCake","openCake");
-}
-
-/* CAKE */
+/* FLOW */
+function playMusic(){document.getElementById("music").play()}
+function closeMusic(){hide("winMusic");unlock("iconCake",openCake)}
 function makeWish(){
-  document.getElementById("flame").style.display="none";
+  document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
 }
-function closeCake(){
-  hide("winCake");
-  activate("iconWish","openWish");
-}
-
-/* UCAPAN */
-function closeWish(){
-  hide("winWish");
-  activate("iconPhoto","openPhoto");
-}
+function closeCake(){hide("winCake");unlock("iconWish",openWish)}
+function closeWish(){hide("winWish");unlock("iconPhoto",openPhoto)}
+function closePhoto(){hide("photoWin")}
 
 /* PHOTO */
-function closePhoto(){hide("photoWin")}
-function next(){
-  i=(i+1)%photos.length;
-  document.getElementById("photo").src=photos[i];
-}
-function prev(){
-  i=(i-1+photos.length)%photos.length;
-  document.getElementById("photo").src=photos[i];
-}
+function next(){i=(i+1)%photos.length;photo.src=photos[i]}
+function prev(){i=(i-1+photos.length)%photos.length;photo.src=photos[i]}
 
-/* ACTIVATE ICON */
-function activate(id,fn){
+/* UNLOCK ICON */
+function unlock(id,fn){
   let icon=document.getElementById(id);
   icon.classList.add("active");
-  icon.onclick=window[fn];
+  icon.onclick=fn;
 }
 </script>
 
