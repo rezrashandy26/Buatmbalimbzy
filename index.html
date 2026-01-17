@@ -10,28 +10,23 @@ body {
   margin: 0;
   background: #02024b;
   font-family: Tahoma, Arial, sans-serif;
-  color: white;
   height: 100vh;
+  color: white;
   overflow: hidden;
 }
 
-/* Desktop area */
 .desktop {
   position: relative;
   width: 100%;
   height: 100%;
 }
 
-/* Icons */
+/* ICON */
 .icon {
   width: 80px;
   text-align: center;
-  margin: 20px;
   cursor: pointer;
-}
-
-.icon img {
-  width: 48px;
+  margin: 20px;
 }
 
 .icon span {
@@ -40,25 +35,39 @@ body {
   margin-top: 5px;
 }
 
-/* Window */
+/* WINDOW */
 .window {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 500px;
+  width: 520px;
   max-width: 90%;
-  background: #f5f5f5;
+  background: #f1f1f1;
   color: black;
   border: 2px solid #000;
   transform: translate(-50%, -50%);
   display: none;
+  box-shadow: 4px 4px 0 #000;
 }
 
 .titlebar {
   background: #000080;
   color: white;
   padding: 6px 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-size: 14px;
+}
+
+.close {
+  background: red;
+  color: white;
+  border: none;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .content {
@@ -76,7 +85,7 @@ button {
 }
 
 .cake {
-  font-size: 80px;
+  font-size: 90px;
 }
 
 .flame {
@@ -96,40 +105,45 @@ button {
 <div class="desktop">
 
   <!-- ICONS -->
-  <div class="icon" onclick="openWindow('present')" style="position:absolute; top:20px; left:20px;">
+  <div class="icon" style="position:absolute; top:20px; left:20px;" onclick="openWin('presentWin')">
     🎁
     <span>Present.exe</span>
   </div>
 
-  <div class="icon" onclick="playMusic()" style="position:absolute; top:120px; left:20px;">
+  <div class="icon" style="position:absolute; top:120px; left:20px;" onclick="playMusic()">
     🎵
     <span>Music.mp3</span>
   </div>
 
-  <div class="icon" onclick="openWindow('gallery')" style="position:absolute; top:220px; left:20px;">
+  <div class="icon" style="position:absolute; top:220px; left:20px;" onclick="openWin('galleryWin')">
     📷
     <span>Gallery.jpeg</span>
   </div>
 
   <!-- PRESENT WINDOW -->
-  <div class="window" id="present">
-    <div class="titlebar">Happy Birthday</div>
+  <div class="window" id="presentWin">
+    <div class="titlebar">
+      Happy Birthday
+      <button class="close" onclick="closeWin('presentWin')">X</button>
+    </div>
     <div class="content">
       <div class="cake">
         🎂 <span id="flame" class="flame">🔥</span>
       </div>
 
-      <p>Klik lalu tiup dulu 🎈</p>
-
+      <p>Klik tombol lalu tiup dulu 🎈</p>
       <button onclick="tiup()">Tiup Lilin</button>
 
-      <p id="ucapan" style="margin-top:15px;"></p>
+      <p id="ucapan" style="margin-top:15px; white-space:pre-line;"></p>
     </div>
   </div>
 
   <!-- GALLERY WINDOW -->
-  <div class="window" id="gallery">
-    <div class="titlebar">Foto Ulang Tahun</div>
+  <div class="window" id="galleryWin">
+    <div class="titlebar">
+      Foto Ulang Tahun
+      <button class="close" onclick="closeWin('galleryWin')">X</button>
+    </div>
     <div class="content">
       <img src="foto.jpeg" style="width:100%; border-radius:10px;">
     </div>
@@ -140,21 +154,31 @@ button {
 <audio id="music" src="music.mp3"></audio>
 
 <script>
-function openWindow(id) {
+function openWin(id) {
   document.getElementById(id).style.display = "block";
 }
 
+function closeWin(id) {
+  document.getElementById(id).style.display = "none";
+}
+
 function playMusic() {
-  document.getElementById("music").play();
+  const m = document.getElementById("music");
+  m.currentTime = 0;
+  m.play();
 }
 
 function tiup() {
   document.getElementById("flame").style.display = "none";
-  document.getElementById("music").play();
+
+  const m = document.getElementById("music");
+  m.currentTime = 0;
+  m.play();
 
   document.getElementById("ucapan").innerText =
 "SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE-25 🎂\n\n" +
-"Semoga panjang umur, sehat selalu, makin sukses ke depannya, dan terus semangat mengejar skripsinya.\n\n" +
+"Semoga panjang umur, sehat selalu, makin sukses ke depannya,\n" +
+"dan terus semangat mengejar skripsinya.\n\n" +
 "Semoga juga pekerjaannya selalu dilancarkan.\n\n" +
 "Semangat terus Mbanya, jangan banyak stres ke depannya.\n\n" +
 "Amin!!! 🎉";
