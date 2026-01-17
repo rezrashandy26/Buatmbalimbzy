@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Desktop Wah</title>
+<title>Birthday Desktop Ultimate</title>
 <style>
 *{box-sizing:border-box}
 body{
@@ -12,12 +12,13 @@ body{
   color:#fff;
   overflow:hidden;
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  animation:bgMove 20s linear infinite;
+  background-size:400% 400%;
+  animation:bgMove 25s ease infinite;
 }
 @keyframes bgMove{
-  0%{background-position:0% 0%;}
-  50%{background-position:100% 100%;}
-  100%{background-position:0% 0%;}
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
 }
 
 /* DESKTOP */
@@ -42,20 +43,20 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:400px;
+  width:450px;
   background:#121212;
-  border-radius:10px;
-  box-shadow:0 0 20px rgba(0,0,0,.85);
+  border-radius:12px;
+  box-shadow:0 0 25px rgba(0,0,0,.9);
   display:none;
   z-index:10;
 }
 .titlebar{
-  height:28px;
+  height:30px;
   background:#1f1f1f;
   display:flex;
   justify-content:flex-end;
   align-items:center;
-  border-radius:10px 10px 0 0;
+  border-radius:12px 12px 0 0;
   padding:0 5px;
 }
 .win-btn{
@@ -68,8 +69,8 @@ body{
 }
 .win-btn:hover{background:#333}
 .close:hover{background:#c42b1c}
-.content{padding:16px;text-align:center;}
-button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:#ff6f61;color:white;cursor:pointer;margin-top:12px;}
+.content{padding:18px;text-align:center;}
+button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:#ff6f61;color:white;cursor:pointer;margin:10px 5px;}
 
 /* MINI CAKE HORIZONTAL */
 .cake-container{
@@ -80,21 +81,21 @@ button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:
 }
 .cake-area{
   position:relative;
-  width:80px;
+  width:90px;
   margin:0;
 }
 /* Lilin */
 .candles{
   position:absolute;
-  top:-22px;            
+  top:-24px;            
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:8px;
+  gap:10px;
 }
 .candle{
-  width:5px;
-  height:20px;
+  width:6px;
+  height:22px;
   background:#fff;
   border-radius:3px;
   position:relative;
@@ -109,29 +110,29 @@ button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:
   top:-6px;
   left:50%;
   transform:translateX(-50%);
-  width:5px;
-  height:6px;
+  width:6px;
+  height:7px;
   background:radial-gradient(circle at 50% 30%, #ffd700, #ff4500);
   border-radius:50%;
   box-shadow:0 0 6px #ff4500;
   animation:flicker 1s infinite;
 }
 @keyframes flicker{
-  0%{transform:translateX(-50%) scale(1)}
-  50%{transform:translateX(-50%) scale(.85)}
-  100%{transform:translateX(-50%) scale(1)}
+  0%{transform:translateX(-50%) scale(1);}
+  50%{transform:translateX(-50%) scale(.85);}
+  100%{transform:translateX(-50%) scale(1);}
 }
 /* Cake */
 .cake{width:100%}
 .layer{
-  height:25px;
-  margin-top:-4px;
+  height:28px;
+  margin-top:-5px;
   border-radius:6px;
   position:relative;
 }
-.layer.top{background:linear-gradient(#ffe0c4,#ffc1a1)}
-.layer.middle{background:linear-gradient(#ffb7b2,#ffa1a5)}
-.layer.bottom{background:linear-gradient(#ff9aa2,#ff7f8f)}
+.layer.top{background:linear-gradient(#ffe0c4,#ffc1a1);}
+.layer.middle{background:linear-gradient(#ffb7b2,#ffa1a5);}
+.layer.bottom{background:linear-gradient(#ff9aa2,#ff7f8f);}
 .icing{
   height:5px;
   background:#fff;
@@ -160,42 +161,29 @@ button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:
   border-radius:50%;
   box-shadow:0 1px 2px rgba(0,0,0,0.4);
 }
-/* Sprinkle */
-.layer.top::before{
-  content:"";
-  position:absolute;
-  width:2px;height:2px;
-  background:#ff0; top:3px; left:5px; border-radius:50%;
-}
-.layer.top::after{
-  content:"";
-  position:absolute;
-  width:2px;height:2px;
-  background:#0f0; top:6px; left:15px; border-radius:50%;
-}
 
 /* FOTO */
 #photoWin img{
-  max-width:250px;
-  max-height:250px;
-  border-radius:6px;
+  max-width:350px;
+  max-height:350px;
+  border-radius:8px;
   object-fit:contain;
-  box-shadow:0 2px 5px rgba(0,0,0,0.5);
+  box-shadow:0 3px 8px rgba(0,0,0,0.6);
 }
 
 /* Konfeti */
 .confetti-piece{
   position:absolute;
-  width:6px; height:6px;
-  background:red;
+  width:7px; height:7px;
   top:0;
   opacity:0.9;
   pointer-events:none;
   animation:fall 3s linear forwards;
+  border-radius:50%;
 }
 @keyframes fall{
   0%{transform:translateY(0) rotate(0deg);}
-  100%{transform:translateY(300px) rotate(360deg); opacity:0;}
+  100%{transform:translateY(350px) rotate(360deg); opacity:0;}
 }
 </style>
 </head>
@@ -203,22 +191,10 @@ button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:
 
 <!-- DESKTOP -->
 <div class="desktop">
-  <div class="icon active" id="iconMusic" onclick="openMusic()">
-    <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
-    <span>Music</span>
-  </div>
-  <div class="icon" id="iconCake">
-    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
-    <span>Cake</span>
-  </div>
-  <div class="icon" id="iconWish">
-    <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png">
-    <span>Ucapan</span>
-  </div>
-  <div class="icon" id="iconPhoto">
-    <img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png">
-    <span>Foto</span>
-  </div>
+  <div class="icon active" id="iconMusic" onclick="openMusic()"><img src="https://cdn-icons-png.flaticon.com/512/716/716784.png"><span>Music</span></div>
+  <div class="icon" id="iconCake"><img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"><span>Cake</span></div>
+  <div class="icon" id="iconWish"><img src="https://cdn-icons-png.flaticon.com/512/942/942748.png"><span>Ucapan</span></div>
+  <div class="icon" id="iconPhoto"><img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png"><span>Foto</span></div>
 </div>
 
 <!-- MUSIC -->
@@ -231,6 +207,7 @@ button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:
   <div class="content" id="musicContent">
     <h2>Denger lagu dulu 🎵</h2>
     <button onclick="playMusic()">Play Music</button>
+    <button onclick="pauseMusic()">Pause Music</button>
   </div>
 </div>
 
@@ -255,7 +232,7 @@ button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:
           <div class="layer bottom"></div>
         </div>
       </div>
-      <div style="text-align:left; max-width:200px;">
+      <div style="text-align:left; max-width:220px;">
         <h2>🎂 Make a Wish 🎂</h2>
         <p>Tiup lilin dan buat harapanmu!</p>
       </div>
@@ -291,10 +268,11 @@ button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:
     <div class="win-btn">▢</div>
     <div class="win-btn close" onclick="closePhoto()">✕</div>
   </div>
-  <div class="content">
+  <div class="content" id="photoContent">
     <img id="photo" src="foto1.jpeg"><br>
     <button onclick="prev()">Prev</button>
     <button onclick="next()">Next</button>
+    <button onclick="printPhoto()">Cetak</button>
   </div>
 </div>
 
@@ -309,17 +287,15 @@ function hide(id){document.getElementById(id).style.display="none"}
 
 function openMusic(){show("winMusic")}
 function closeMusic(){hide("winMusic"); unlock("iconCake",openCake)}
-
 function openCake(){show("winCake")}
 function closeCake(){hide("winCake"); unlock("iconWish",openWish)}
-
 function openWish(){show("winWish")}
 function closeWish(){hide("winWish"); unlock("iconPhoto",openPhoto)}
-
 function openPhoto(){show("photoWin")}
 function closePhoto(){hide("photoWin")}
 
 function playMusic(){document.getElementById("music").play();}
+function pauseMusic(){document.getElementById("music").pause();}
 
 // Minimize window
 function minimize(id){
@@ -338,19 +314,20 @@ function makeWish(){
 // Foto galeri
 function next(){idx=(idx+1)%photos.length; photo.src=photos[idx];}
 function prev(){idx=(idx-1+photos.length)%photos.length; photo.src=photos[idx];}
+function printPhoto(){let img=document.getElementById('photo');let w=window.open('');w.document.write('<img src="'+img.src+'" style="width:100%">'); w.print();}
 
 // Unlock icon setelah window selesai
 function unlock(id,fn){let el=document.getElementById(id);el.classList.add("active");el.onclick=fn;}
 
 // Konfeti
 function spawnConfetti(){
-  for(let i=0;i<40;i++){
+  for(let i=0;i<60;i++){
     let conf=document.createElement('div');
     conf.className='confetti-piece';
-    conf.style.left=Math.random()*400+'px';
+    conf.style.left=Math.random()*window.innerWidth+'px';
     conf.style.background='hsl('+Math.random()*360+',70%,60%)';
     document.body.appendChild(conf);
-    setTimeout(()=>conf.remove(),3000);
+    setTimeout(()=>conf.remove(),3500);
   }
 }
 
@@ -362,17 +339,17 @@ function showPopup(){
   popup.style.top='50%';
   popup.style.left='50%';
   popup.style.transform='translate(-50%,-50%)';
-  popup.style.background='rgba(255,111,97,0.9)';
-  popup.style.padding='12px 20px';
-  popup.style.borderRadius='10px';
-  popup.style.fontSize='18px';
-  popup.style.boxShadow='0 0 15px rgba(0,0,0,0.5)';
+  popup.style.background='rgba(255,111,97,0.95)';
+  popup.style.padding='14px 22px';
+  popup.style.borderRadius='12px';
+  popup.style.fontSize='20px';
+  popup.style.boxShadow='0 0 20px rgba(0,0,0,0.6)';
   popup.style.opacity=0;
   popup.style.transition='opacity 0.5s';
   document.body.appendChild(popup);
   setTimeout(()=>popup.style.opacity=1,50);
-  setTimeout(()=>popup.style.opacity=0,2000);
-  setTimeout(()=>popup.remove(),2500);
+  setTimeout(()=>popup.style.opacity=0,2500);
+  setTimeout(()=>popup.remove(),3000);
 }
 </script>
 </body>
