@@ -2,227 +2,253 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday</title>
+<title>Birthday Desktop</title>
 
 <style>
 body{
-    margin:0;
-    background:#1e1e1e;
-    font-family:Segoe UI, sans-serif;
+  margin:0;
+  background:linear-gradient(#001a4d,#000814);
+  font-family:Tahoma, Arial, sans-serif;
+  height:100vh;
+  overflow:hidden;
+  color:white;
+}
+
+/* DESKTOP */
+.desktop{
+  width:100%;
+  height:100%;
+  position:relative;
+}
+
+/* ICON */
+.icon{
+  width:80px;
+  text-align:center;
+  cursor:pointer;
+  margin:20px;
+  user-select:none;
+}
+.icon span{
+  font-size:12px;
+  display:block;
+  margin-top:5px;
 }
 
 /* WINDOW */
 .window{
-    width:900px;
-    margin:40px auto;
-    background:linear-gradient(#ffe6c7,#ffc1a1);
-    border-radius:12px;
-    box-shadow:0 20px 50px rgba(0,0,0,.6);
-    overflow:hidden;
+  position:absolute;
+  top:50%;
+  left:50%;
+  width:520px;
+  background:#f2f2f2;
+  color:black;
+  border:2px solid #000;
+  transform:translate(-50%,-50%);
+  display:none;
+  box-shadow:6px 6px 0 #000;
 }
+.small{width:320px;}
+.minimized .content{display:none}
 
 /* TITLE BAR */
 .titlebar{
-    background:#2b2b2b;
-    color:white;
-    height:40px;
-    display:flex;
-    align-items:center;
-    padding:0 10px;
-    justify-content:space-between;
+  background:#000080;
+  color:white;
+  padding:6px 8px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  font-size:14px;
 }
-
-.titlebar span{
-    font-size:14px;
-}
-
 .controls{
-    display:flex;
-    gap:8px;
+  display:flex;
+  gap:6px;
 }
-
 .ctrl{
-    width:14px;
-    height:14px;
-    border-radius:50%;
-    cursor:pointer;
+  width:16px;
+  height:16px;
+  border-radius:50%;
+  cursor:pointer;
 }
-
-.min{background:#f1c40f;}
-.resize{background:#2ecc71;}
-.close{background:#e74c3c;}
+.min{background:#f1c40f}
+.resize{background:#2ecc71}
+.close{background:#e74c3c}
 
 /* CONTENT */
 .content{
-    padding:30px;
-    text-align:center;
-}
-
-h1{
-    font-size:38px;
+  padding:15px;
+  text-align:center;
 }
 
 /* SLIDESHOW */
-#slideshow{
-    width:500px;
-    height:300px;
-    margin:20px auto;
-    border-radius:20px;
-    overflow:hidden;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+.slideshow{
+  width:100%;
+  height:220px;
+  overflow:hidden;
+  border-radius:10px;
 }
-
-#slideshow img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
+.slideshow img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
 }
 
 /* CAKE */
 .cake{
-    margin:30px auto;
-    width:220px;
-    height:140px;
-    background:#d18b47;
-    border-radius:0 0 20px 20px;
-    position:relative;
+  margin:15px auto;
+  width:180px;
+  height:110px;
+  background:#d18b47;
+  border-radius:0 0 20px 20px;
+  position:relative;
 }
-
 .cake::before{
-    content:"";
-    position:absolute;
-    top:-30px;
-    width:100%;
-    height:40px;
-    background:#fff3e0;
-    border-radius:20px 20px 0 0;
+  content:"";
+  position:absolute;
+  top:-25px;
+  width:100%;
+  height:35px;
+  background:#fff3e0;
+  border-radius:20px 20px 0 0;
 }
-
 .candle{
-    width:12px;
-    height:45px;
-    background:#4fc3f7;
-    position:absolute;
-    top:-75px;
-    left:50%;
-    transform:translateX(-50%);
-    border-radius:5px;
+  width:10px;
+  height:35px;
+  background:#4fc3f7;
+  position:absolute;
+  top:-60px;
+  left:50%;
+  transform:translateX(-50%);
 }
-
 .flame{
-    width:16px;
-    height:16px;
-    background:orange;
-    border-radius:50%;
-    position:absolute;
-    top:-18px;
-    left:-2px;
-    animation:flicker .25s infinite;
+  width:14px;
+  height:14px;
+  background:orange;
+  border-radius:50%;
+  position:absolute;
+  top:-16px;
+  left:-2px;
+  animation:flicker .25s infinite;
 }
-
 @keyframes flicker{
-    0%{transform:scale(1);}
-    50%{transform:scale(.8);}
-    100%{transform:scale(1);}
+  0%{opacity:1}
+  50%{opacity:.5}
+  100%{opacity:1}
 }
-
-.off{display:none;}
+.off{display:none}
 
 button{
-    padding:12px 25px;
-    border:none;
-    border-radius:25px;
-    background:#ff7043;
-    color:white;
-    font-size:16px;
-    cursor:pointer;
+  padding:8px 20px;
+  border:none;
+  border-radius:6px;
+  background:#ff6f61;
+  color:white;
+  cursor:pointer;
+  margin-top:10px;
 }
-
-.ucapan{
-    margin-top:20px;
-    font-size:18px;
-    line-height:1.6;
-}
-
-/* STATES */
-.minimized .content{display:none;}
-.small{width:500px;}
 </style>
 </head>
 
 <body>
 
-<audio id="music" autoplay loop>
-    <source src="music.mp3" type="audio/mpeg">
-</audio>
+<div class="desktop">
 
-<div class="window" id="window">
+  <!-- ICONS -->
+  <div class="icon" style="position:absolute;top:20px;left:20px" onclick="openWin('present')">
+    🎁
+    <span>Present.exe</span>
+  </div>
+
+  <div class="icon" style="position:absolute;top:120px;left:20px" onclick="openWin('gallery')">
+    📷
+    <span>Photos</span>
+  </div>
+
+  <div class="icon" style="position:absolute;top:220px;left:20px" onclick="playMusic()">
+    🎵
+    <span>Music.mp3</span>
+  </div>
+
+  <!-- PRESENT WINDOW -->
+  <div class="window" id="present">
     <div class="titlebar">
-        <span>🎂 Birthday App</span>
-        <div class="controls">
-            <div class="ctrl min" onclick="minimize()"></div>
-            <div class="ctrl resize" onclick="resizeWin()"></div>
-            <div class="ctrl close" onclick="closeWin()"></div>
-        </div>
+      Happy Birthday
+      <div class="controls">
+        <div class="ctrl min" onclick="minimize('present')"></div>
+        <div class="ctrl resize" onclick="resizeWin('present')"></div>
+        <div class="ctrl close" onclick="closeWin('present')"></div>
+      </div>
     </div>
-
     <div class="content">
-        <h1>🎉 HAPPY BIRTHDAY 🎉</h1>
-
-        <div id="slideshow">
-            <img id="slide" src="foto1.jpeg">
+      <div class="cake">
+        <div class="candle">
+          <div class="flame" id="flame"></div>
         </div>
+      </div>
 
-        <div class="cake">
-            <div class="candle">
-                <div class="flame" id="flame"></div>
-            </div>
-        </div>
+      <button onclick="tiup()">Tiup Lilin</button>
 
-        <button onclick="blow()">Tiup Lilin 🎂</button>
+      <p style="white-space:pre-line;margin-top:10px">
+SELAMAT ULANG TAHUN MBA LIMBZYY KE-25 🎉
 
-        <div class="ucapan">
-            SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE-25 🎉<br><br>
-            Semoga panjang umur, sehat selalu, makin sukses ke depannya,<br>
-            terus semangat mengejar skripsi dan pekerjaannya dilancarkan.<br><br>
-            Jangan banyak stres ke depannya.<br><br>
-            <b>AMIN!!!</b>
-        </div>
+Semoga panjang umur, sehat selalu,
+makin sukses ke depannya,
+skripsi & pekerjaan dilancarkan.
+
+Jangan banyak stres.
+AMIN!!!
+      </p>
     </div>
+  </div>
+
+  <!-- GALLERY WINDOW -->
+  <div class="window" id="gallery">
+    <div class="titlebar">
+      Photo Viewer
+      <div class="controls">
+        <div class="ctrl min" onclick="minimize('gallery')"></div>
+        <div class="ctrl resize" onclick="resizeWin('gallery')"></div>
+        <div class="ctrl close" onclick="closeWin('gallery')"></div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="slideshow">
+        <img id="slide" src="foto1.jpeg">
+      </div>
+    </div>
+  </div>
+
 </div>
 
+<audio id="music" src="music.mp3"></audio>
+
 <script>
-/* MUSIC FIX */
-document.body.addEventListener("click",()=>{
-    document.getElementById("music").play();
-},{once:true});
+/* WINDOW */
+function openWin(id){document.getElementById(id).style.display="block"}
+function closeWin(id){document.getElementById(id).style.display="none"}
+function minimize(id){document.getElementById(id).classList.toggle("minimized")}
+function resizeWin(id){document.getElementById(id).classList.toggle("small")}
+
+/* MUSIC */
+function playMusic(){
+  const m=document.getElementById("music");
+  m.currentTime=0;
+  m.play();
+}
 
 /* SLIDESHOW */
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
 let i=0;
 setInterval(()=>{
-    i=(i+1)%photos.length;
-    document.getElementById("slide").src=photos[i];
+  i=(i+1)%photos.length;
+  document.getElementById("slide").src=photos[i];
 },3000);
 
-/* LILIN */
-function blow(){
-    document.getElementById("flame").classList.add("off");
-    alert("Lilin berhasil ditiup 🎉");
-}
-
-/* WINDOW CONTROLS */
-function minimize(){
-    document.getElementById("window").classList.toggle("minimized");
-}
-
-function resizeWin(){
-    document.getElementById("window").classList.toggle("small");
-}
-
-function closeWin(){
-    alert("Terima kasih sudah membuka 🎂");
-    window.location.href="about:blank";
+/* CANDLE */
+function tiup(){
+  document.getElementById("flame").classList.add("off");
+  playMusic();
 }
 </script>
 
