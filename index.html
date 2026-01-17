@@ -2,20 +2,25 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Desktop</title>
-
+<title>Birthday Desktop Wah</title>
 <style>
 *{box-sizing:border-box}
 body{
   margin:0;
   height:100vh;
-  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   font-family:Segoe UI,Arial,sans-serif;
   color:#fff;
   overflow:hidden;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+  animation:bgMove 20s linear infinite;
+}
+@keyframes bgMove{
+  0%{background-position:0% 0%;}
+  50%{background-position:100% 100%;}
+  100%{background-position:0% 0%;}
 }
 
-/* ================= DESKTOP ================= */
+/* DESKTOP */
 .desktop{
   padding:15px;
 }
@@ -24,16 +29,14 @@ body{
   margin-bottom:18px;
   text-align:center;
   cursor:pointer;
+  transition: transform .2s;
 }
+.icon:hover{transform:scale(1.2);}
 .icon img{width:48px;opacity:.35}
 .icon.active img{opacity:1}
-.icon span{
-  display:block;
-  font-size:12px;
-  margin-top:4px;
-}
+.icon span{display:block;font-size:12px;margin-top:4px;}
 
-/* ================= WINDOW ================= */
+/* WINDOW */
 .window{
   position:absolute;
   top:50%;
@@ -44,8 +47,8 @@ body{
   border-radius:10px;
   box-shadow:0 0 20px rgba(0,0,0,.85);
   display:none;
+  z-index:10;
 }
-
 .titlebar{
   height:28px;
   background:#1f1f1f;
@@ -65,37 +68,21 @@ body{
 }
 .win-btn:hover{background:#333}
 .close:hover{background:#c42b1c}
+.content{padding:16px;text-align:center;}
+button{padding:6px 16px;font-size:14px;border:none;border-radius:6px;background:#ff6f61;color:white;cursor:pointer;margin-top:12px;}
 
-.content{
-  padding:16px;
-  text-align:center;
-}
-
-button{
-  padding:6px 16px;
-  font-size:14px;
-  border:none;
-  border-radius:6px;
-  background:#ff6f61;
-  color:white;
-  cursor:pointer;
-  margin-top:12px;
-}
-
-/* ================= MINI CAKE HORIZONTAL ================= */
+/* MINI CAKE HORIZONTAL */
 .cake-container{
   display:flex;
   align-items:center;
   justify-content:center;
   gap:15px;
 }
-
 .cake-area{
   position:relative;
-  width:80px;        /* kecil agar tidak menutupi tulisan */
+  width:80px;
   margin:0;
 }
-
 /* Lilin */
 .candles{
   position:absolute;
@@ -111,6 +98,11 @@ button{
   background:#fff;
   border-radius:3px;
   position:relative;
+  animation:wobble 1s infinite alternate;
+}
+@keyframes wobble{
+  0%{transform:rotate(-3deg);}
+  100%{transform:rotate(3deg);}
 }
 .flame{
   position:absolute;
@@ -121,6 +113,7 @@ button{
   height:6px;
   background:radial-gradient(circle at 50% 30%, #ffd700, #ff4500);
   border-radius:50%;
+  box-shadow:0 0 6px #ff4500;
   animation:flicker 1s infinite;
 }
 @keyframes flicker{
@@ -128,8 +121,7 @@ button{
   50%{transform:translateX(-50%) scale(.85)}
   100%{transform:translateX(-50%) scale(1)}
 }
-
-/* Kue */
+/* Cake */
 .cake{width:100%}
 .layer{
   height:25px;
@@ -140,7 +132,6 @@ button{
 .layer.top{background:linear-gradient(#ffe0c4,#ffc1a1)}
 .layer.middle{background:linear-gradient(#ffb7b2,#ffa1a5)}
 .layer.bottom{background:linear-gradient(#ff9aa2,#ff7f8f)}
-
 .icing{
   height:5px;
   background:#fff;
@@ -158,8 +149,6 @@ button{
 }
 .icing::after{left:5px;}
 .icing::before{right:5px;}
-
-/* Cherry/topper */
 .cherry{
   position:absolute;
   top:-6px;
@@ -171,8 +160,21 @@ button{
   border-radius:50%;
   box-shadow:0 1px 2px rgba(0,0,0,0.4);
 }
+/* Sprinkle */
+.layer.top::before{
+  content:"";
+  position:absolute;
+  width:2px;height:2px;
+  background:#ff0; top:3px; left:5px; border-radius:50%;
+}
+.layer.top::after{
+  content:"";
+  position:absolute;
+  width:2px;height:2px;
+  background:#0f0; top:6px; left:15px; border-radius:50%;
+}
 
-/* ================= FOTO ================= */
+/* FOTO */
 #photoWin img{
   max-width:250px;
   max-height:250px;
@@ -180,35 +182,46 @@ button{
   object-fit:contain;
   box-shadow:0 2px 5px rgba(0,0,0,0.5);
 }
+
+/* Konfeti */
+.confetti-piece{
+  position:absolute;
+  width:6px; height:6px;
+  background:red;
+  top:0;
+  opacity:0.9;
+  pointer-events:none;
+  animation:fall 3s linear forwards;
+}
+@keyframes fall{
+  0%{transform:translateY(0) rotate(0deg);}
+  100%{transform:translateY(300px) rotate(360deg); opacity:0;}
+}
 </style>
 </head>
-
 <body>
 
-<!-- ================= DESKTOP ================= -->
+<!-- DESKTOP -->
 <div class="desktop">
   <div class="icon active" id="iconMusic" onclick="openMusic()">
     <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
     <span>Music</span>
   </div>
-
   <div class="icon" id="iconCake">
     <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
     <span>Cake</span>
   </div>
-
   <div class="icon" id="iconWish">
     <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png">
     <span>Ucapan</span>
   </div>
-
   <div class="icon" id="iconPhoto">
     <img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png">
     <span>Foto</span>
   </div>
 </div>
 
-<!-- ================= MUSIC ================= -->
+<!-- MUSIC -->
 <div class="window" id="winMusic">
   <div class="titlebar">
     <div class="win-btn" onclick="minimize('winMusic')">—</div>
@@ -221,7 +234,7 @@ button{
   </div>
 </div>
 
-<!-- ================= CAKE CSS ================= -->
+<!-- CAKE -->
 <div class="window" id="winCake">
   <div class="titlebar">
     <div class="win-btn" onclick="minimize('winCake')">—</div>
@@ -230,7 +243,6 @@ button{
   </div>
   <div class="content">
     <div class="cake-container">
-      <!-- Cake CSS -->
       <div class="cake-area">
         <div class="candles">
           <div class="candle"><div class="flame"></div></div>
@@ -243,25 +255,23 @@ button{
           <div class="layer bottom"></div>
         </div>
       </div>
-
-      <!-- Tulisan di samping -->
       <div style="text-align:left; max-width:200px;">
         <h2>🎂 Make a Wish 🎂</h2>
         <p>Tiup lilin dan buat harapanmu!</p>
       </div>
     </div>
-    <button onclick="makeWish()" style="margin-top:15px;">Make a Wish</button>
+    <button onclick="makeWish()">Make a Wish</button>
   </div>
 </div>
 
-<!-- ================= UCAPAN ================= -->
+<!-- UCAPAN -->
 <div class="window" id="winWish">
   <div class="titlebar">
     <div class="win-btn" onclick="minimize('winWish')">—</div>
     <div class="win-btn">▢</div>
     <div class="win-btn close" onclick="closeWish()">✕</div>
   </div>
-  <div class="content" id="wishContent">
+  <div class="content">
     <h2>🎉 SELAMAT ULANG TAHUN 🎉</h2>
     <p>
       SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
@@ -274,14 +284,14 @@ button{
   </div>
 </div>
 
-<!-- ================= FOTO ================= -->
+<!-- FOTO -->
 <div class="window" id="photoWin">
   <div class="titlebar">
     <div class="win-btn" onclick="minimize('photoWin')">—</div>
     <div class="win-btn">▢</div>
     <div class="win-btn close" onclick="closePhoto()">✕</div>
   </div>
-  <div class="content" id="photoContent">
+  <div class="content">
     <img id="photo" src="foto1.jpeg"><br>
     <button onclick="prev()">Prev</button>
     <button onclick="next()">Next</button>
@@ -309,43 +319,61 @@ function closeWish(){hide("winWish"); unlock("iconPhoto",openPhoto)}
 function openPhoto(){show("photoWin")}
 function closePhoto(){hide("photoWin")}
 
-function playMusic(){
-  document.getElementById("music").play();
-}
+function playMusic(){document.getElementById("music").play();}
 
 // Minimize window
 function minimize(id){
   let win=document.getElementById(id);
   let content=win.querySelector(".content");
-  if(content.style.display==="none"){
-    content.style.display="block";
-  } else {
-    content.style.display="none";
-  }
+  content.style.display=(content.style.display==="none")?"block":"none";
 }
 
-// Padamkan lilin
+// Padamkan lilin + konfeti + popup
 function makeWish(){
   document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
+  spawnConfetti();
+  showPopup();
 }
 
 // Foto galeri
-function next(){
-  idx=(idx+1)%photos.length;
-  photo.src=photos[idx];
-}
-function prev(){
-  idx=(idx-1+photos.length)%photos.length;
-  photo.src=photos[idx];
-}
+function next(){idx=(idx+1)%photos.length; photo.src=photos[idx];}
+function prev(){idx=(idx-1+photos.length)%photos.length; photo.src=photos[idx];}
 
 // Unlock icon setelah window selesai
-function unlock(id,fn){
-  let el=document.getElementById(id);
-  el.classList.add("active");
-  el.onclick=fn;
+function unlock(id,fn){let el=document.getElementById(id);el.classList.add("active");el.onclick=fn;}
+
+// Konfeti
+function spawnConfetti(){
+  for(let i=0;i<40;i++){
+    let conf=document.createElement('div');
+    conf.className='confetti-piece';
+    conf.style.left=Math.random()*400+'px';
+    conf.style.background='hsl('+Math.random()*360+',70%,60%)';
+    document.body.appendChild(conf);
+    setTimeout(()=>conf.remove(),3000);
+  }
+}
+
+// Popup Wish Granted
+function showPopup(){
+  let popup=document.createElement('div');
+  popup.innerText='Wish Granted! 🎉';
+  popup.style.position='fixed';
+  popup.style.top='50%';
+  popup.style.left='50%';
+  popup.style.transform='translate(-50%,-50%)';
+  popup.style.background='rgba(255,111,97,0.9)';
+  popup.style.padding='12px 20px';
+  popup.style.borderRadius='10px';
+  popup.style.fontSize='18px';
+  popup.style.boxShadow='0 0 15px rgba(0,0,0,0.5)';
+  popup.style.opacity=0;
+  popup.style.transition='opacity 0.5s';
+  document.body.appendChild(popup);
+  setTimeout(()=>popup.style.opacity=1,50);
+  setTimeout(()=>popup.style.opacity=0,2000);
+  setTimeout(()=>popup.remove(),2500);
 }
 </script>
-
 </body>
 </html>
