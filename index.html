@@ -9,62 +9,98 @@
 body{
   margin:0;
   height:100vh;
-  background:#1e1e2f;
+  background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
   font-family:Segoe UI,Arial,sans-serif;
   color:#fff;
+  overflow:hidden;
 }
 
-/* ===== WINDOW ===== */
+/* ================= DESKTOP ================= */
+.desktop{
+  padding:20px;
+}
+.icon{
+  width:90px;
+  margin-bottom:22px;
+  text-align:center;
+  cursor:pointer;
+}
+.icon img{width:64px;opacity:.35}
+.icon.active img{opacity:1}
+.icon span{
+  display:block;
+  font-size:14px;
+  margin-top:6px;
+}
+
+/* ================= WINDOW ================= */
 .window{
   position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
   width:600px;
-  background:#111;
+  background:#121212;
   border-radius:10px;
-  box-shadow:0 0 30px rgba(0,0,0,.8);
+  box-shadow:0 0 30px rgba(0,0,0,.85);
+  display:none;
 }
+
 .titlebar{
   height:32px;
-  background:#222;
+  background:#1f1f1f;
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
   border-radius:10px 10px 0 0;
 }
+.win-btn{
+  width:45px;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  cursor:pointer;
+}
+.win-btn:hover{background:#333}
+.close:hover{background:#c42b1c}
+
 .content{
   padding:24px;
   text-align:center;
 }
+
 button{
-  margin-top:20px;
   padding:10px 26px;
   font-size:15px;
   border:none;
   border-radius:6px;
   background:#ff6f61;
-  color:#fff;
+  color:white;
   cursor:pointer;
+  margin-top:20px;
 }
 
-/* ===== CAKE ===== */
+/* ================= CAKE ================= */
 .cake-area{
   position:relative;
   width:360px;
   margin:30px auto 10px;
 }
 
-/* LILIN */
+/* Lilin */
 .candles{
   position:absolute;
   top:-55px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:45px;
+  gap:40px;
 }
 .candle{
   width:12px;
   height:50px;
-  background:#fff;
+  background:#ffffff;
   border-radius:4px;
   position:relative;
 }
@@ -75,81 +111,189 @@ button{
   transform:translateX(-50%);
   width:14px;
   height:20px;
-  background:radial-gradient(circle at 50% 30%,#ffd700,#ff4500);
+  background:radial-gradient(circle at 50% 30%, #ffd700, #ff4500);
   border-radius:50%;
-  animation:flicker .9s infinite;
+  animation:flicker 1s infinite;
 }
-
-/* API GERAK */
 @keyframes flicker{
   0%{transform:translateX(-50%) scale(1)}
   50%{transform:translateX(-50%) scale(.85)}
   100%{transform:translateX(-50%) scale(1)}
 }
 
-/* KUE */
-.cake{
-  width:100%;
-}
+/* Kue */
+.cake{width:100%}
 .layer{
   height:90px;
-  border-radius:12px;
   margin-top:-15px;
+  border-radius:12px;
 }
-.layer.bottom{
-  background:#ff9aa2;
-}
-.layer.middle{
-  background:#ffb7b2;
-}
-.layer.top{
-  background:#ffc8a2;
-}
+.layer.top{background:#ffc8a2}
+.layer.middle{background:#ffb7b2}
+.layer.bottom{background:#ff9aa2}
 .icing{
   height:18px;
-  background:#fff;
+  background:#ffffff;
   border-radius:0 0 12px 12px;
+}
+
+/* ================= PHOTO ================= */
+#photoWin img{
+  max-width:50vw;
+  max-height:60vh;
+  border-radius:8px;
+  object-fit:contain;
 }
 </style>
 </head>
 
 <body>
 
-<div class="window">
-  <div class="titlebar"></div>
+<!-- ================= DESKTOP ================= -->
+<div class="desktop">
+
+  <div class="icon active" id="iconMusic" onclick="openMusic()">
+    <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
+    <span>Music</span>
+  </div>
+
+  <div class="icon" id="iconCake">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
+    <span>Cake</span>
+  </div>
+
+  <div class="icon" id="iconWish">
+    <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png">
+    <span>Ucapan</span>
+  </div>
+
+  <div class="icon" id="iconPhoto">
+    <img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png">
+    <span>Foto</span>
+  </div>
+
+</div>
+
+<!-- ================= MUSIC ================= -->
+<div class="window" id="winMusic">
+  <div class="titlebar">
+    <div class="win-btn">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closeMusic()">✕</div>
+  </div>
+  <div class="content">
+    <h2>Denger lagu dulu 🎵</h2>
+    <button onclick="playMusic()">Play Music</button>
+  </div>
+</div>
+
+<!-- ================= CAKE ================= -->
+<div class="window" id="winCake">
+  <div class="titlebar">
+    <div class="win-btn">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closeCake()">✕</div>
+  </div>
 
   <div class="content">
-    <h2>Make a Wish 🎂</h2>
+    <h2>🎂 Make a Wish 🎂</h2>
 
-    <!-- KUE -->
     <div class="cake-area">
 
-      <!-- LILIN -->
-      <div class="candles" id="candles">
+      <div class="candles">
         <div class="candle"><div class="flame"></div></div>
         <div class="candle"><div class="flame"></div></div>
         <div class="candle"><div class="flame"></div></div>
       </div>
 
-      <!-- BADAN KUE -->
       <div class="cake">
-        <div class="layer top">
-          <div class="icing"></div>
-        </div>
+        <div class="layer top"><div class="icing"></div></div>
         <div class="layer middle"></div>
         <div class="layer bottom"></div>
       </div>
+
     </div>
 
     <button onclick="makeWish()">Make a Wish</button>
   </div>
 </div>
 
+<!-- ================= UCAPAN ================= -->
+<div class="window" id="winWish">
+  <div class="titlebar">
+    <div class="win-btn">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closeWish()">✕</div>
+  </div>
+  <div class="content">
+    <h2>🎉 SELAMAT ULANG TAHUN 🎉</h2>
+    <p>
+      SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
+      SEMOGA PANJANG UMUR, SEHAT SELALU,<br>
+      MAKIN SUKSES KEDEPANNYA,<br>
+      LANCAR SKRIPSI DAN PEKERJAANNYA,<br><br>
+      JANGAN BANYAK STRESS 😄<br>
+      AMIN!!!
+    </p>
+  </div>
+</div>
+
+<!-- ================= FOTO ================= -->
+<div class="window" id="photoWin">
+  <div class="titlebar">
+    <div class="win-btn">—</div>
+    <div class="win-btn">▢</div>
+    <div class="win-btn close" onclick="closePhoto()">✕</div>
+  </div>
+  <div class="content">
+    <img id="photo" src="foto1.jpeg"><br>
+    <button onclick="prev()">Prev</button>
+    <button onclick="next()">Next</button>
+  </div>
+</div>
+
+<audio id="music" src="music.mp3"></audio>
+
 <script>
+let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
+let idx=0;
+
+function show(id){document.getElementById(id).style.display="block"}
+function hide(id){document.getElementById(id).style.display="none"}
+
+function openMusic(){show("winMusic")}
+function closeMusic(){hide("winMusic"); unlock("iconCake",openCake)}
+
+function openCake(){show("winCake")}
+function closeCake(){hide("winCake"); unlock("iconWish",openWish)}
+
+function openWish(){show("winWish")}
+function closeWish(){hide("winWish"); unlock("iconPhoto",openPhoto)}
+
+function openPhoto(){show("photoWin")}
+function closePhoto(){hide("photoWin")}
+
+function playMusic(){
+  document.getElementById("music").play();
+}
+
 function makeWish(){
-  document.querySelectorAll('.flame').forEach(f=>{
-    f.style.display='none';
-  });
+  document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
+}
+
+function next(){
+  idx=(idx+1)%photos.length;
+  photo.src=photos[idx];
+}
+function prev(){
+  idx=(idx-1+photos.length)%photos.length;
+  photo.src=photos[idx];
+}
+
+function unlock(id,fn){
+  let el=document.getElementById(id);
+  el.classList.add("active");
+  el.onclick=fn;
 }
 </script>
 
