@@ -5,34 +5,36 @@
 <title>Birthday Desktop</title>
 
 <style>
+*{box-sizing:border-box}
+
 body{
   margin:0;
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  font-family:Arial,Helvetica,sans-serif;
+  font-family:Segoe UI, Arial, sans-serif;
   height:100vh;
   overflow:hidden;
   color:white;
 }
 
-/* ================= DESKTOP ICON ================= */
+/* ================= DESKTOP ================= */
 .desktop{
   padding:20px;
 }
 .icon{
   width:90px;
+  margin-bottom:22px;
   text-align:center;
-  margin-bottom:20px;
   cursor:pointer;
 }
 .icon img{
   width:64px;
-  opacity:0.4;
+  opacity:.35;
 }
 .icon.active img{opacity:1}
 .icon span{
   display:block;
-  margin-top:5px;
   font-size:14px;
+  margin-top:6px;
 }
 
 /* ================= WINDOW ================= */
@@ -41,84 +43,93 @@ body{
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  width:560px;
-  background:#111;
-  border-radius:8px;
-  box-shadow:0 0 25px rgba(0,0,0,.8);
+  width:600px;
+  background:#121212;
+  border-radius:10px;
+  box-shadow:0 0 30px rgba(0,0,0,.85);
   display:none;
 }
 
-/* TITLEBAR WINDOWS STYLE */
 .titlebar{
   height:32px;
-  background:#1e1e1e;
+  background:#1f1f1f;
   display:flex;
   justify-content:flex-end;
   align-items:center;
+  border-radius:10px 10px 0 0;
 }
 .win-btn{
   width:45px;
   height:100%;
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
   cursor:pointer;
 }
 .win-btn:hover{background:#333}
 .close:hover{background:#c42b1c}
 
 .content{
-  padding:22px;
+  padding:24px;
   text-align:center;
 }
 
 button{
-  padding:10px 22px;
+  padding:10px 24px;
+  font-size:15px;
   border:none;
   border-radius:6px;
   background:#ff6f61;
   color:white;
   cursor:pointer;
-  margin-top:14px;
-  font-size:15px;
+  margin-top:16px;
 }
 
 /* ================= CAKE ================= */
-.cake-box{
+.cake-wrapper{
   position:relative;
-  width:380px;        /* KUE LEBIH BESAR */
-  margin:20px auto;
+  width:420px;          /* UKURAN BESAR & STABIL */
+  margin:20px auto 10px;
 }
-.cake-box img{
+
+.cake-wrapper img{
   width:100%;
   display:block;
 }
 
-/* CANDLE */
-.candle{
+/* Lilin container */
+.candles{
   position:absolute;
+  top:28px;             /* TITIK API DI ATAS KUE */
+  left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:55px;
+}
+
+/* Lilin */
+.candle{
   width:10px;
-  height:45px;
+  height:50px;
   background:#fff;
   border-radius:3px;
-  top:55px;           /* POSISI DI ATAS KUE */
+  position:relative;
 }
-.c1{left:120px}
-.c2{left:185px}
-.c3{left:250px}
 
-/* FLAME */
+/* Api */
 .flame{
   position:absolute;
-  top:-22px;
-  left:-6px;
-  font-size:24px;
+  top:-24px;
+  left:50%;
+  transform:translateX(-50%);
+  font-size:22px;
   animation:flicker 1s infinite;
 }
+
 @keyframes flicker{
-  0%{opacity:1}
-  50%{opacity:.5}
-  100%{opacity:1}
+  0%{opacity:1; transform:translateX(-50%) scale(1)}
+  50%{opacity:.6; transform:translateX(-50%) scale(.9)}
+  100%{opacity:1; transform:translateX(-50%) scale(1)}
 }
 
 /* ================= PHOTO ================= */
@@ -133,7 +144,7 @@ button{
 
 <body>
 
-<!-- ================= DESKTOP ================= -->
+<!-- ================= DESKTOP ICONS ================= -->
 <div class="desktop">
 
   <div class="icon active" id="iconMusic" onclick="openMusic()">
@@ -158,7 +169,7 @@ button{
 
 </div>
 
-<!-- ================= MUSIC WINDOW ================= -->
+<!-- ================= MUSIC ================= -->
 <div class="window" id="winMusic">
   <div class="titlebar">
     <div class="win-btn">—</div>
@@ -171,7 +182,7 @@ button{
   </div>
 </div>
 
-<!-- ================= CAKE WINDOW ================= -->
+<!-- ================= CAKE ================= -->
 <div class="window" id="winCake">
   <div class="titlebar">
     <div class="win-btn">—</div>
@@ -181,19 +192,21 @@ button{
   <div class="content">
     <h2>Make a Wish 🎂</h2>
 
-    <div class="cake-box">
+    <div class="cake-wrapper">
       <img src="cake.jpeg">
 
-      <div class="candle c1"><div class="flame">🔥</div></div>
-      <div class="candle c2"><div class="flame">🔥</div></div>
-      <div class="candle c3"><div class="flame">🔥</div></div>
+      <div class="candles" id="candles">
+        <div class="candle"><div class="flame">🔥</div></div>
+        <div class="candle"><div class="flame">🔥</div></div>
+        <div class="candle"><div class="flame">🔥</div></div>
+      </div>
     </div>
 
-    <button onclick="makeWish()">Make a Wish</button>
+    <button onclick="blow()">Make a Wish</button>
   </div>
 </div>
 
-<!-- ================= UCAPAN WINDOW ================= -->
+<!-- ================= UCAPAN ================= -->
 <div class="window" id="winWish">
   <div class="titlebar">
     <div class="win-btn">—</div>
@@ -203,18 +216,15 @@ button{
   <div class="content">
     <h2>🎉 Selamat Ulang Tahun 🎉</h2>
     <p>
-      SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
-      SEMOGA PANJANG UMUR SEHAT SELALU,<br>
-      MAKIN SUKSES KEDEPANNYA,<br>
-      TERUS SEMANGAT MENGEJAR SKRIPSIANNYA,<br>
-      DAN PEKERJAANNYA DILANCARKAN,<br>
-      JANGAN BANYAK STRESS,<br>
-      AMINNN!!!
+      Selamat ulang tahun 🎂<br><br>
+      Semoga sehat selalu, panjang umur,<br>
+      semua harapan dan doa terbaik tercapai.<br><br>
+      Tetap semangat dan bahagia selalu.
     </p>
   </div>
 </div>
 
-<!-- ================= FOTO WINDOW ================= -->
+<!-- ================= FOTO ================= -->
 <div class="window" id="photoWin">
   <div class="titlebar">
     <div class="win-btn">—</div>
@@ -232,54 +242,44 @@ button{
 
 <script>
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
-let i=0;
+let idx=0;
 
-/* OPEN WINDOWS */
-function openMusic(){show("winMusic")}
-function openCake(){show("winCake")}
-function openWish(){show("winWish")}
-function openPhoto(){show("photoWin")}
+/* WINDOW CONTROL */
 function show(id){document.getElementById(id).style.display="block"}
 function hide(id){document.getElementById(id).style.display="none"}
 
-/* FLOW CONTROL */
+function openMusic(){show("winMusic")}
+function closeMusic(){hide("winMusic"); unlock("iconCake",openCake)}
+function openCake(){show("winCake")}
+function closeCake(){hide("winCake"); unlock("iconWish",openWish)}
+function openWish(){show("winWish")}
+function closeWish(){hide("winWish"); unlock("iconPhoto",openPhoto)}
+function openPhoto(){show("photoWin")}
+function closePhoto(){hide("photoWin")}
+
+/* FLOW */
 function playMusic(){
   document.getElementById("music").play();
 }
-function closeMusic(){
-  hide("winMusic");
-  unlock("iconCake",openCake);
-}
-function makeWish(){
+function blow(){
   document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
 }
-function closeCake(){
-  hide("winCake");
-  unlock("iconWish",openWish);
-}
-function closeWish(){
-  hide("winWish");
-  unlock("iconPhoto",openPhoto);
-}
-function closePhoto(){
-  hide("photoWin");
-}
 
-/* PHOTO CONTROL */
+/* PHOTO */
 function next(){
-  i=(i+1)%photos.length;
-  photo.src=photos[i];
+  idx=(idx+1)%photos.length;
+  photo.src=photos[idx];
 }
 function prev(){
-  i=(i-1+photos.length)%photos.length;
-  photo.src=photos[i];
+  idx=(idx-1+photos.length)%photos.length;
+  photo.src=photos[idx];
 }
 
 /* UNLOCK ICON */
 function unlock(id,fn){
-  let icon=document.getElementById(id);
-  icon.classList.add("active");
-  icon.onclick=fn;
+  let el=document.getElementById(id);
+  el.classList.add("active");
+  el.onclick=fn;
 }
 </script>
 
