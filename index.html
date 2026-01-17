@@ -2,98 +2,99 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Happy Birthday 🎉</title>
+<title>Happy Birthday</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: linear-gradient(120deg, #1d2671, #c33764);
-    color: white;
-    height: 100vh;
-    overflow: hidden;
+body{
+    margin:0;
+    background:linear-gradient(120deg,#141E30,#243B55);
+    font-family:Arial,sans-serif;
+    color:white;
+    height:100vh;
 }
 
-.window {
-    width: 90%;
-    height: 90%;
-    margin: auto;
-    margin-top: 2%;
-    background: rgba(0,0,0,0.4);
-    border-radius: 12px;
-    box-shadow: 0 0 25px rgba(0,0,0,0.5);
-    display: flex;
-    flex-direction: column;
+.desktop{
+    width:100%;
+    height:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 }
 
-.title-bar {
-    background: #222;
-    padding: 8px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 8px;
+.window{
+    width:90%;
+    height:90%;
+    background:rgba(0,0,0,0.45);
+    border-radius:12px;
+    display:flex;
+    flex-direction:column;
 }
 
-.btn-win {
-    width: 14px;
-    height: 14px;
-    border-radius: 50%;
-}
-.close { background:red }
-.min { background:orange }
-.resize { background:green }
-
-.content {
-    flex: 1;
-    text-align: center;
-    padding: 20px;
+.titlebar{
+    height:35px;
+    background:#222;
+    display:flex;
+    justify-content:flex-end;
+    align-items:center;
+    padding-right:10px;
+    gap:8px;
 }
 
-button {
-    padding: 12px 22px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-size: 16px;
-    margin: 10px;
+.dot{width:14px;height:14px;border-radius:50%}
+.red{background:red}
+.yellow{background:orange}
+.green{background:lime}
+
+.content{
+    flex:1;
+    text-align:center;
+    padding:20px;
 }
 
-.primary { background:#ffd700 }
-.secondary { background:#00e5ff }
-
-.hidden { display:none }
-
-#cake img {
-    max-width: 320px;
+button{
+    padding:12px 25px;
+    font-size:16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    margin:10px;
 }
 
-#candle {
-    font-size: 40px;
-    animation: flicker 1s infinite;
+.hidden{display:none}
+
+#cake img{
+    max-width:320px;
 }
 
-@keyframes flicker {
-    0% {opacity:1}
-    50% {opacity:0.5}
-    100% {opacity:1}
+#flame{
+    font-size:40px;
+    animation:flicker 1s infinite;
 }
 
-#gallery img {
-    max-width: 50vw;
-    max-height: 60vh;
-    border-radius: 10px;
-    object-fit: contain;
+@keyframes flicker{
+    0%{opacity:1}
+    50%{opacity:0.4}
+    100%{opacity:1}
+}
+
+#photo{
+    max-width:50vw;
+    max-height:60vh;
+    object-fit:contain;
+    border-radius:10px;
 }
 </style>
 </head>
 
 <body>
 
+<div class="desktop">
 <div class="window">
-    <div class="title-bar">
-        <div class="btn-win min"></div>
-        <div class="btn-win resize"></div>
-        <div class="btn-win close" onclick="alert('Tidak bisa ditutup 😄')"></div>
+
+    <div class="titlebar">
+        <div class="dot red"></div>
+        <div class="dot yellow"></div>
+        <div class="dot green"></div>
     </div>
 
     <div class="content">
@@ -101,7 +102,7 @@ button {
         <!-- STEP 1 -->
         <div id="step1">
             <h2>DENGER LAGU DULU 🎵</h2>
-            <button class="primary" onclick="playMusic()">Play Music</button>
+            <button onclick="playMusic()">Play Music</button>
         </div>
 
         <!-- STEP 2 -->
@@ -109,9 +110,9 @@ button {
             <h2>TIUP LILIN & MAKE A WISH 🎂</h2>
             <div id="cake">
                 <img src="cake.png">
-                <div id="candle">🕯️🕯️🕯️</div>
+                <div id="flame">🕯️🕯️🕯️</div>
             </div>
-            <button class="secondary" onclick="blowCandle()">Tiup Lilin</button>
+            <button onclick="blow()">Tiup Lilin</button>
         </div>
 
         <!-- STEP 3 -->
@@ -123,47 +124,46 @@ button {
             SEMOGA PANJANG UMUR SEHAT SELALU,  
             MAKIN SUKSES KEDEPANNYA DAN TERUS SEMANGAT  
             MENGEJAR SKRIPSIANNYA DAN PEKERJAANNYA  
-            DILANCARKAN. JANGAN BANYAK STRESS  
+            DI LANCARKAN, JANGAN BANYAK STRESS  
             AMINNN!!!
             </p>
 
-            <div id="gallery">
-                <img id="photo" src="foto1.jpeg">
-            </div>
+            <img id="photo" src="foto1.jpeg"><br>
 
-            <button onclick="prevPhoto()">Prev</button>
-            <button onclick="nextPhoto()">Next</button>
+            <button onclick="prev()">Prev</button>
+            <button onclick="next()">Next</button>
         </div>
 
     </div>
+</div>
 </div>
 
 <audio id="music" src="music.mpe3"></audio>
 
 <script>
-let photos = ["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
-let index = 0;
+let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
+let i=0;
 
-function playMusic() {
+function playMusic(){
     document.getElementById("music").play();
     document.getElementById("step1").classList.add("hidden");
     document.getElementById("step2").classList.remove("hidden");
 }
 
-function blowCandle() {
-    document.getElementById("candle").style.display="none";
+function blow(){
+    document.getElementById("flame").style.display="none";
     document.getElementById("step2").classList.add("hidden");
     document.getElementById("step3").classList.remove("hidden");
 }
 
-function nextPhoto() {
-    index = (index + 1) % photos.length;
-    document.getElementById("photo").src = photos[index];
+function next(){
+    i=(i+1)%photos.length;
+    document.getElementById("photo").src=photos[i];
 }
 
-function prevPhoto() {
-    index = (index - 1 + photos.length) % photos.length;
-    document.getElementById("photo").src = photos[index];
+function prev(){
+    i=(i-1+photos.length)%photos.length;
+    document.getElementById("photo").src=photos[i];
 }
 </script>
 
