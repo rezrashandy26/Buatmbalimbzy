@@ -17,36 +17,26 @@ body{
 }
 
 /* ================= DESKTOP ================= */
-.desktop{
-  padding:20px;
-}
+.desktop{padding:20px}
 .icon{
   width:90px;
   margin-bottom:22px;
   text-align:center;
   cursor:pointer;
 }
-.icon img{
-  width:64px;
-  opacity:.35;
-}
+.icon img{width:64px;opacity:.35}
 .icon.active img{opacity:1}
-.icon span{
-  display:block;
-  font-size:14px;
-  margin-top:6px;
-}
+.icon span{display:block;font-size:14px;margin-top:6px}
 
 /* ================= WINDOW ================= */
 .window{
   position:absolute;
-  top:50%;
-  left:50%;
+  top:50%;left:50%;
   transform:translate(-50%,-50%);
   width:600px;
   background:#121212;
   border-radius:10px;
-  box-shadow:0 0 30px rgba(0,0,0,.85);
+  box-shadow:0 0 30px rgba(0,0,0,.8);
   display:none;
 }
 
@@ -59,94 +49,96 @@ body{
   border-radius:10px 10px 0 0;
 }
 .win-btn{
-  width:45px;
-  height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+  width:45px;height:100%;
+  display:flex;align-items:center;justify-content:center;
   cursor:pointer;
 }
 .win-btn:hover{background:#333}
 .close:hover{background:#c42b1c}
 
-.content{
-  padding:24px;
-  text-align:center;
-}
+.content{text-align:center;padding:24px}
 
 button{
-  padding:10px 24px;
-  font-size:15px;
+  padding:10px 26px;
   border:none;
   border-radius:6px;
   background:#ff6f61;
   color:white;
   cursor:pointer;
-  margin-top:16px;
+  margin-top:20px;
+  font-size:15px;
 }
 
-/* ================= CAKE ================= */
-.cake-wrapper{
+/* ================= CSS CAKE ================= */
+.cake{
   position:relative;
-  width:420px;          /* UKURAN BESAR & STABIL */
-  margin:20px auto 10px;
+  width:320px;
+  margin:30px auto 10px;
 }
 
-.cake-wrapper img{
+/* KUE */
+.layer{
   width:100%;
-  display:block;
+  height:90px;
+  background:linear-gradient(#ffb6c1,#ff69b4);
+  border-radius:10px;
+  box-shadow:0 4px 0 #d94b85;
+}
+.layer.middle{margin-top:-12px;height:80px}
+.layer.top{
+  margin-top:-12px;
+  height:70px;
+  border-radius:10px 10px 6px 6px;
 }
 
-/* Lilin container */
+/* CANDLE */
 .candles{
   position:absolute;
-  top:28px;             /* TITIK API DI ATAS KUE */
+  top:-55px;
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:55px;
+  gap:40px;
 }
-
-/* Lilin */
 .candle{
-  width:10px;
-  height:50px;
-  background:#fff;
-  border-radius:3px;
+  width:12px;
+  height:55px;
+  background:white;
+  border-radius:4px;
   position:relative;
 }
-
-/* Api */
 .flame{
   position:absolute;
-  top:-24px;
+  top:-22px;
   left:50%;
   transform:translateX(-50%);
-  font-size:22px;
+  width:14px;
+  height:20px;
+  background:radial-gradient(circle,#ffd700,#ff4500);
+  border-radius:50%;
   animation:flicker 1s infinite;
 }
 
 @keyframes flicker{
-  0%{opacity:1; transform:translateX(-50%) scale(1)}
-  50%{opacity:.6; transform:translateX(-50%) scale(.9)}
-  100%{opacity:1; transform:translateX(-50%) scale(1)}
+  0%{transform:translateX(-50%) scale(1)}
+  50%{transform:translateX(-50%) scale(.85)}
+  100%{transform:translateX(-50%) scale(1)}
 }
 
 /* ================= PHOTO ================= */
 #photoWin img{
   max-width:50vw;
   max-height:60vh;
-  object-fit:contain;
   border-radius:8px;
+  object-fit:contain;
 }
 </style>
 </head>
 
 <body>
 
-<!-- ================= DESKTOP ICONS ================= -->
+<!-- ================= DESKTOP ================= -->
 <div class="desktop">
-
   <div class="icon active" id="iconMusic" onclick="openMusic()">
     <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
     <span>Music</span>
@@ -166,7 +158,6 @@ button{
     <img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png">
     <span>Foto</span>
   </div>
-
 </div>
 
 <!-- ================= MUSIC ================= -->
@@ -192,14 +183,16 @@ button{
   <div class="content">
     <h2>Make a Wish 🎂</h2>
 
-    <div class="cake-wrapper">
-      <img src="cake.jpeg">
-
-      <div class="candles" id="candles">
-        <div class="candle"><div class="flame">🔥</div></div>
-        <div class="candle"><div class="flame">🔥</div></div>
-        <div class="candle"><div class="flame">🔥</div></div>
+    <div class="cake">
+      <div class="candles">
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
+        <div class="candle"><div class="flame"></div></div>
       </div>
+
+      <div class="layer top"></div>
+      <div class="layer middle"></div>
+      <div class="layer"></div>
     </div>
 
     <button onclick="blow()">Make a Wish</button>
@@ -214,12 +207,14 @@ button{
     <div class="win-btn close" onclick="closeWish()">✕</div>
   </div>
   <div class="content">
-    <h2>🎉 Selamat Ulang Tahun 🎉</h2>
+    <h2>🎉 SELAMAT ULANG TAHUN 🎉</h2>
     <p>
-      Selamat ulang tahun 🎂<br><br>
-      Semoga sehat selalu, panjang umur,<br>
-      semua harapan dan doa terbaik tercapai.<br><br>
-      Tetap semangat dan bahagia selalu.
+      SELAMAT ULANG TAHUN MBA LIMBZYY YANG KE 25,<br><br>
+      SEMOGA PANJANG UMUR, SEHAT SELALU,<br>
+      MAKIN SUKSES KEDEPANNYA,<br>
+      LANCAR SKRIPSI DAN PEKERJAANNYA,<br><br>
+      JANGAN BANYAK STRESS 😄<br>
+      AMIN!!!
     </p>
   </div>
 </div>
@@ -244,7 +239,6 @@ button{
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
 let idx=0;
 
-/* WINDOW CONTROL */
 function show(id){document.getElementById(id).style.display="block"}
 function hide(id){document.getElementById(id).style.display="none"}
 
@@ -257,25 +251,12 @@ function closeWish(){hide("winWish"); unlock("iconPhoto",openPhoto)}
 function openPhoto(){show("photoWin")}
 function closePhoto(){hide("photoWin")}
 
-/* FLOW */
-function playMusic(){
-  document.getElementById("music").play();
-}
-function blow(){
-  document.querySelectorAll(".flame").forEach(f=>f.style.display="none");
-}
+function playMusic(){document.getElementById("music").play()}
+function blow(){document.querySelectorAll(".flame").forEach(f=>f.style.display="none")}
 
-/* PHOTO */
-function next(){
-  idx=(idx+1)%photos.length;
-  photo.src=photos[idx];
-}
-function prev(){
-  idx=(idx-1+photos.length)%photos.length;
-  photo.src=photos[idx];
-}
+function next(){idx=(idx+1)%photos.length;photo.src=photos[idx]}
+function prev(){idx=(idx-1+photos.length)%photos.length;photo.src=photos[idx]}
 
-/* UNLOCK ICON */
 function unlock(id,fn){
   let el=document.getElementById(id);
   el.classList.add("active");
