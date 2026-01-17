@@ -82,35 +82,35 @@ button{
   margin-top:12px;
 }
 
-/* ================= MINI CAKE ================= */
+/* ================= MINI CAKE HORIZONTAL ================= */
 .cake-area{
   position:relative;
-  width:90px;        /* lebih kecil */
-  margin:16px auto;
+  width:70px;        /* lebih kecil agar muat samping tulisan */
+  margin:0;
 }
 
 .candles{
   position:absolute;
-  top:-24px;            
+  top:-18px;            
   left:50%;
   transform:translateX(-50%);
   display:flex;
-  gap:10px;
+  gap:8px;
 }
 .candle{
-  width:5px;
-  height:20px;
+  width:4px;
+  height:18px;
   background:#fff;
   border-radius:3px;
   position:relative;
 }
 .flame{
   position:absolute;
-  top:-8px;
+  top:-6px;
   left:50%;
   transform:translateX(-50%);
-  width:6px;
-  height:8px;
+  width:5px;
+  height:6px;
   background:radial-gradient(circle at 50% 30%, #ffd700, #ff4500);
   border-radius:50%;
   animation:flicker 1s infinite;
@@ -123,54 +123,43 @@ button{
 
 .cake{width:100%}
 .layer{
-  height:25px;
-  margin-top:-5px;
-  border-radius:6px;
+  height:20px;
+  margin-top:-4px;
+  border-radius:5px;
   position:relative;
 }
 .layer.top{background:linear-gradient(#ffd4c4,#ffc1a1)}
 .layer.middle{background:linear-gradient(#ffb7b2,#ffa1a5)}
 .layer.bottom{background:linear-gradient(#ff9aa2,#ff7f8f)}
 
-/* Icing drip effect */
 .icing{
-  height:5px;
+  height:4px;
   background:#fff;
-  border-radius:0 0 6px 6px;
+  border-radius:0 0 5px 5px;
   position:relative;
 }
-.icing::after{
+.icing::after, .icing::before{
   content:"";
   position:absolute;
-  width:4px;
-  height:5px;
+  width:3px;
+  height:4px;
   background:#fff;
   border-radius:50%;
-  left:8px;
-  bottom:-5px;
+  bottom:-4px;
 }
-.icing::before{
-  content:"";
-  position:absolute;
-  width:4px;
-  height:5px;
-  background:#fff;
-  border-radius:50%;
-  right:8px;
-  bottom:-5px;
-}
+.icing::after{left:6px;}
+.icing::before{right:6px;}
 
-/* Cherry */
 .cherry{
   position:absolute;
-  top:-6px;
+  top:-5px;
   left:50%;
   transform:translateX(-50%);
-  width:8px;
-  height:8px;
+  width:6px;
+  height:6px;
   background:red;
   border-radius:50%;
-  box-shadow:0 2px 2px rgba(0,0,0,0.3);
+  box-shadow:0 1px 1px rgba(0,0,0,0.3);
 }
 
 /* ================= PHOTO ================= */
@@ -223,7 +212,7 @@ button{
   </div>
 </div>
 
-<!-- ================= MINI CAKE ================= -->
+<!-- ================= MINI CAKE HORIZONTAL ================= -->
 <div class="window" id="winCake">
   <div class="titlebar">
     <div class="win-btn" onclick="minimize('winCake')">—</div>
@@ -231,20 +220,27 @@ button{
     <div class="win-btn close" onclick="closeCake()">✕</div>
   </div>
   <div class="content" id="cakeContent">
-    <h2>🎂 Make a Wish 🎂</h2>
-    <div class="cake-area">
-      <div class="candles">
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
-        <div class="candle"><div class="flame"></div></div>
+    <div style="display:flex; align-items:center; justify-content:center; gap:15px;">
+      <!-- Kue di samping -->
+      <div class="cake-area">
+        <div class="candles">
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+          <div class="candle"><div class="flame"></div></div>
+        </div>
+        <div class="cake">
+          <div class="layer top"><div class="icing"></div><div class="cherry"></div></div>
+          <div class="layer middle"></div>
+          <div class="layer bottom"></div>
+        </div>
       </div>
-      <div class="cake">
-        <div class="layer top"><div class="icing"></div><div class="cherry"></div></div>
-        <div class="layer middle"></div>
-        <div class="layer bottom"></div>
+      <!-- Tulisan di samping -->
+      <div style="text-align:left; max-width:200px;">
+        <h2>🎂 Make a Wish 🎂</h2>
+        <p>Tiup lilin dan buat harapanmu!</p>
       </div>
     </div>
-    <button onclick="makeWish()">Make a Wish</button>
+    <button onclick="makeWish()" style="margin-top:15px;">Make a Wish</button>
   </div>
 </div>
 
