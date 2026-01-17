@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Birthday Surprise</title>
+<title>Birthday Desktop</title>
 
 <style>
 body{
@@ -13,47 +13,59 @@ body{
   overflow:hidden;
   color:white;
 }
+.desktop{width:100%;height:100%;position:relative}
 
-/* POPUP */
+/* ICON */
+.icon{
+  width:90px;
+  text-align:center;
+  cursor:pointer;
+  margin:20px;
+}
+.icon span{font-size:12px;display:block}
+
+/* POPUP INFO */
 .popup{
   position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,.75);
+  padding:12px 22px;
+  border-radius:20px;
+  font-size:14px;
+  display:none;
+}
+.popup.show{display:block}
+
+/* WINDOW */
+.window{
+  position:absolute;
   top:50%;
   left:50%;
   transform:translate(-50%,-50%);
-  background:#111;
-  border:2px solid #fff;
-  padding:25px 30px;
-  text-align:center;
-  z-index:10;
+  background:#f2f2f2;
+  color:black;
+  border:2px solid #000;
+  width:520px;
   display:none;
-  width:320px;
+  box-shadow:6px 6px 0 #000;
 }
-.popup.active{display:block}
-
-.popup h2{
-  margin:0 0 15px;
-  font-size:20px;
-}
-
-.popup button{
-  padding:10px 22px;
-  border:none;
-  border-radius:20px;
-  background:#ff6f61;
+.titlebar{
+  background:#000080;
   color:white;
-  cursor:pointer;
-  font-size:15px;
+  padding:6px 10px;
 }
+.content{text-align:center;padding:15px}
 
-/* CAKE IMAGE */
+/* CAKE */
 .cake{
   width:100%;
-  max-height:220px;
+  max-height:240px;
   object-fit:contain;
-  margin-bottom:15px;
 }
 
-/* DESKTOP PHOTO */
+/* PHOTO DESKTOP */
 .photo-box{
   position:absolute;
   top:50%;
@@ -67,13 +79,11 @@ body{
   justify-content:center;
   box-shadow:0 0 25px rgba(0,0,0,.8);
 }
-
 .photo-box img{
   max-width:100%;
   max-height:100%;
   object-fit:contain;
 }
-
 .photo-controls{
   position:fixed;
   bottom:20px;
@@ -90,67 +100,104 @@ body{
   color:white;
   cursor:pointer;
 }
+button{
+  padding:10px 20px;
+  border:none;
+  border-radius:20px;
+  background:#ff6f61;
+  color:white;
+  cursor:pointer;
+}
 </style>
 </head>
 
 <body>
 
-<!-- POPUP 1 -->
-<div class="popup active" id="popup1">
-  <h2>Denger lagu dulu 🎵</h2>
-  <button onclick="playMusic()">Play Music</button>
-</div>
+<div class="desktop">
 
-<!-- POPUP 2 -->
-<div class="popup" id="popup2">
-  <h2>Tiup lilin & make a wish 🎂</h2>
-  <img src="cake.jpeg" class="cake">
-  <button onclick="blow()">Tiup Lilin</button>
-</div>
+  <!-- ICONS -->
+  <div class="icon" style="position:absolute;top:20px;left:20px" onclick="playMusic()">
+    🎵<span>Music</span>
+  </div>
 
-<!-- POPUP 3 -->
-<div class="popup" id="popup3">
-  <h2>Klik foto untuk melihat kenangan 📷</h2>
-  <button onclick="showPhotos()">Buka Foto</button>
-</div>
+  <div class="icon" style="position:absolute;top:120px;left:20px" onclick="openCake()">
+    🎂<span>Cake</span>
+  </div>
 
-<!-- PHOTO DESKTOP -->
-<div class="photo-box" id="photoBox">
-  <img id="photo" src="foto1.jpeg">
-</div>
+  <div class="icon" style="position:absolute;top:220px;left:20px" onclick="openPhotos()">
+    📁<span>Photos</span>
+  </div>
 
-<div class="photo-controls" id="photoCtrl">
-  <button onclick="prev()">◀ Prev</button>
-  <button onclick="next()">Next ▶</button>
+  <!-- POPUP -->
+  <div class="popup show" id="popup">Denger lagu dulu ya 🎵</div>
+
+  <!-- CAKE WINDOW -->
+  <div class="window" id="cakeWin">
+    <div class="titlebar">Tiup Lilin</div>
+    <div class="content">
+      <img src="cake.jpeg" class="cake">
+      <br>
+      <button onclick="blow()">Tiup Lilin 🎉</button>
+    </div>
+  </div>
+
+  <!-- PHOTO -->
+  <div class="photo-box" id="photoBox">
+    <img id="photo" src="foto1.jpeg">
+  </div>
+
+  <div class="photo-controls" id="photoCtrl">
+    <button onclick="prev()">◀ Prev</button>
+    <button onclick="next()">Next ▶</button>
+  </div>
+
 </div>
 
 <audio id="music" src="music.mp3" loop></audio>
 
 <script>
+let musicPlayed=false;
+let candleBlown=false;
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
 let idx=0;
 
-/* STEP 1 */
+function showPopup(text){
+  const p=document.getElementById("popup");
+  p.textContent=text;
+  p.classList.add("show");
+  setTimeout(()=>p.classList.remove("show"),3500);
+}
+
+/* MUSIC */
 function playMusic(){
   document.getElementById("music").play();
-  document.getElementById("popup1").classList.remove("active");
-  document.getElementById("popup2").classList.add("active");
+  musicPlayed=true;
+  showPopup("Sekarang buka folder kue & tiup lilin 🎂");
 }
 
-/* STEP 2 */
+/* CAKE */
+function openCake(){
+  if(!musicPlayed){
+    showPopup("Dengerin lagu dulu ya 🎵");
+    return;
+  }
+  document.getElementById("cakeWin").style.display="block";
+}
 function blow(){
-  document.getElementById("popup2").classList.remove("active");
-  document.getElementById("popup3").classList.add("active");
+  candleBlown=true;
+  document.getElementById("cakeWin").style.display="none";
+  showPopup("Sekarang buka folder foto 📁");
 }
 
-/* STEP 3 */
-function showPhotos(){
-  document.getElementById("popup3").classList.remove("active");
+/* PHOTOS */
+function openPhotos(){
+  if(!candleBlown){
+    showPopup("Tiup lilin dulu ya 🎂");
+    return;
+  }
   document.getElementById("photoBox").style.display="flex";
   document.getElementById("photoCtrl").style.display="block";
 }
-
-/* PHOTO NAV */
 function next(){
   idx=(idx+1)%photos.length;
   document.getElementById("photo").src=photos[idx];
