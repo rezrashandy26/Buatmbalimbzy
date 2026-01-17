@@ -7,8 +7,7 @@
 *{box-sizing:border-box;}
 body{margin:0;font-family:Segoe UI,Arial,sans-serif;color:#fff;overflow:hidden;
   background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
-  background-size:400% 400%;
-  animation:bgMove 25s ease infinite;}
+  background-size:400% 400%;animation:bgMove 25s ease infinite;}
 @keyframes bgMove{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
 
 /* Desktop Icons */
@@ -30,8 +29,8 @@ button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:
 
 /* Cake */
 .cake-container{display:flex;align-items:center;gap:10px;}
-.cake-area{position:relative;width:70px;margin:0;}
-.candles{position:absolute;top:-20px;left:50%;transform:translateX(-50%);display:flex;gap:6px;}
+.cake-area{position:relative;width:60px;margin:0;}
+.candles{position:absolute;top:-20px;left:50%;transform:translateX(-50%);display:flex;gap:5px;}
 .candle{width:6px;height:22px;background:#fff;border-radius:3px;position:relative;animation:wobble 1s infinite alternate;}
 @keyframes wobble{0%{transform:rotate(-3deg);}100%{transform:rotate(3deg);}}
 .flame{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:6px;height:7px;background:radial-gradient(circle at 50% 30%, #ffd700, #ff4500);border-radius:50%;box-shadow:0 0 6px #ff4500;animation:flicker 1s infinite;}
@@ -45,7 +44,7 @@ button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:
 .cherry{position:absolute;top:-6px;left:50%;transform:translateX(-50%);width:6px;height:6px;background:red;border-radius:50%;box-shadow:0 1px 2px rgba(0,0,0,0.4);}
 
 /* Foto */
-#photoWin img{max-width:300px;max-height:300px;border-radius:8px;object-fit:contain;box-shadow:0 3px 8px rgba(0,0,0,0.6);}
+#photoWin img{max-width:320px;max-height:320px;border-radius:8px;object-fit:contain;box-shadow:0 3px 8px rgba(0,0,0,0.6);}
 
 /* Confetti */
 .confetti-piece{position:absolute;width:7px;height:7px;top:0;opacity:0.9;pointer-events:none;animation:fall 3s linear forwards;border-radius:50%;}
@@ -59,13 +58,25 @@ button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:
 <body>
 
 <div class="desktop">
-  <div class="icon active" id="iconMusic" onclick="openMusic()"><img src="https://cdn-icons-png.flaticon.com/512/716/716784.png"><span>Music</span></div>
-  <div class="icon active" id="iconCake" onclick="openCake()"><img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png"><span>Cake</span></div>
-  <div class="icon" id="iconWish"><img src="https://cdn-icons-png.flaticon.com/512/942/942748.png"><span>Ucapan</span></div>
-  <div class="icon" id="iconPhoto"><img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png"><span>Foto</span></div>
+  <div class="icon active" id="iconMusic" onclick="openMusic()">
+    <img src="https://cdn-icons-png.flaticon.com/512/716/716784.png">
+    <span>Music</span>
+  </div>
+  <div class="icon active" id="iconCake" onclick="openCake()">
+    <img src="https://cdn-icons-png.flaticon.com/512/3075/3075977.png">
+    <span>Cake</span>
+  </div>
+  <div class="icon" id="iconWish">
+    <img src="https://cdn-icons-png.flaticon.com/512/942/942748.png">
+    <span>Ucapan</span>
+  </div>
+  <div class="icon" id="iconPhoto">
+    <img src="https://cdn-icons-png.flaticon.com/512/2659/2659360.png">
+    <span>Foto</span>
+  </div>
 </div>
 
-<!-- Music -->
+<!-- Music Window -->
 <div class="window" id="winMusic">
   <div class="titlebar">
     <div class="win-btn" onclick="minimize('winMusic')">—</div>
@@ -151,30 +162,37 @@ button{padding:8px 18px;font-size:14px;border:none;border-radius:6px;background:
 let photos=["foto1.jpeg","foto2.jpeg","foto3.jpeg"];
 let idx=0;
 
-function show(id){document.getElementById(id).style.display="block";}
-function hide(id){document.getElementById(id).style.display="none";}
-function openCake(){show("winCake");}
-function closeCake(){hide("winCake");unlock("iconWish",openWish);}
-function openWish(){show("winWish");}
-function closeWish(){hide("winWish");unlock("iconPhoto",openPhoto);}
-function openPhoto(){show("photoWin");}
-function closePhoto(){hide("photoWin");}
+// tampilkan window musik otomatis
+window.onload = function(){
+    document.getElementById("winMusic").style.display = "block";
+    document.getElementById("iconMusic").classList.add("active");
+};
+
+// fungsi open/close/minimize
+function openMusic(){document.getElementById("winMusic").style.display="block";}
+function closeMusic(){document.getElementById("winMusic").style.display="none";}
+function openCake(){document.getElementById("winCake").style.display="block";}
+function closeCake(){document.getElementById("winCake").style.display="none";unlock("iconWish",openWish);}
+function openWish(){document.getElementById("winWish").style.display="block";}
+function closeWish(){document.getElementById("winWish").style.display="none";unlock("iconPhoto",openPhoto);}
+function openPhoto(){document.getElementById("photoWin").style.display="block";}
+function closePhoto(){document.getElementById("photoWin").style.display="none";}
 function minimize(id){
   let win=document.getElementById(id);
   let content=win.querySelector(".content");
   content.style.display=(content.style.display==="none")?"block":"none";
 }
+
+// photo controls
 function next(){idx=(idx+1)%photos.length; photo.src=photos[idx];}
 function prev(){idx=(idx-1+photos.length)%photos.length; photo.src=photos[idx];}
 function printPhoto(){let img=document.getElementById('photo');let w=window.open('');w.document.write('<img src="'+img.src+'" style="width:100%">'); w.print();}
 function unlock(id,fn){let el=document.getElementById(id);el.classList.add("active");el.onclick=fn;}
 
-// Music controls (autoplay after user interaction)
+// music
 const music = document.getElementById("music");
 function playMusic(){music.play();}
 function pauseMusic(){music.pause();}
-
-// Auto play musik setelah klik pertama desktop
 document.querySelector(".desktop").addEventListener("click", ()=>{music.play();}, {once:true});
 
 // Make a Wish
